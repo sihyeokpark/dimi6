@@ -1,0 +1,21 @@
+nav.navbar {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-color);
+  color: #ffffff;
+  padding: 5px 10vw 5px 10vw;
+  width: 100%;
+  height: 50px;
+}
+
+nav.navbar a {
+  color: var(--txt-color);
+  text-decoration: none;
+  margin: 2vw;
+}
+
+nav.navbar .logo {
+  font-weight: 700;
+}
