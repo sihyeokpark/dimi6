@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import client from '../lib/client'
 
 type Data = {
-  name: string
+  StatusCode: number
 }
 
 export default async function handler(
@@ -11,18 +11,14 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   if (req.method == 'POST') {
-    console.log(req.body)
     await client.user.create({
       data: {
-        // ...req.body,
-        email: req.body.email,
-        name: req.body.name,
-        password: req.body.password,
-        point: 0,
+        ...req.body,
+        point: 0
       },
     })
     res.json({
-      name: 'true',
+      StatusCode: 200,
     })
   }
 }
