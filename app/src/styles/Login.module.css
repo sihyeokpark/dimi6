@@ -1,0 +1,12 @@
+main.main {
+  max-width: 1080px;
+  text-align: left;
+  height: 100vh;
+  padding: 100px 100px 100px 100px;
+}
+
+div.center {
+  margin: 0 auto;
+  max-width: 1080px;
+  text-align: left;
+}
