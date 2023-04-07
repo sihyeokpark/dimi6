@@ -22,12 +22,13 @@ export default async function handler(
     if (data.length === 1) {
       res.json({
         StatusCode: 200,
-        message: `${data[0].name} login successfully`,
+        message: `user ${data[0].name} login successfully`,
       })
     } else {
       res.json({
         StatusCode: 401,
         message: 'login failed',
+        error: 'username or password is incorrect'
       })
     }
   }
