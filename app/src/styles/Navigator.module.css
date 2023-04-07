@@ -7,7 +7,11 @@ nav.navbar {
   color: #ffffff;
   padding: 5px 10vw 5px 10vw;
   width: 100%;
-  height: 50px;
+  height: 70px;
+}
+
+nav.navbar div {
+  vertical-align: middle;
 }
 
 nav.navbar a {
@@ -18,4 +22,11 @@ nav.navbar a {
 
 nav.navbar .logo {
   font-weight: 700;
+}
+
+nav.navbar div img {
+  border-radius: 100%;
+  vertical-align: middle;
+  height: 45px;
+  margin: 2vw;
 }
