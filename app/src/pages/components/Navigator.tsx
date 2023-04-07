@@ -9,7 +9,7 @@ export default function Navigator() {
       </div>
       <div className={styles.right}>
         <a>Home</a>
-        <a>Point</a>
+        <a>Shop</a>
         <img src="./exon.png"></img>
       </div>
     </nav>

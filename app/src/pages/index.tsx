@@ -5,8 +5,6 @@ import styles from '@/styles/Home.module.css'
 
 import Navigator from './components/Navigator'
 
-const inter = Inter({ subsets: ['latin'] })
-
 export default function Home() {
   return (
     <>
