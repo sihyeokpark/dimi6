@@ -27,14 +27,17 @@ export default function Home() {
           <section className={styles.content}>
             <div className={styles.card}>
               <div className={styles.row}>
-                <h1 className={styles.moneyTitle}><span className={styles.money}>3400</span> 포인트</h1>
+                <h1 className={styles.point}>포인트</h1>
+                <h1 className={styles.moneyTitle}><span className={styles.money}>3400</span>p</h1>
               </div>
             </div>
             <div className={styles.card}>
-              <h1>이벤트 자리?</h1>
+              <h1>이벤트</h1>
+              <p>10월 22일 박시혁의 생일</p>
             </div>
             <div className={styles.card}>
               <h1>오늘의 제제쌤</h1>
+              <p>좋은 제자에게는 좋은 코치가 있다. </p>
             </div>
           </section>
         </main>
