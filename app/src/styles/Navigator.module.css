@@ -18,6 +18,7 @@ nav.navbar a {
   color: var(--txt-color);
   text-decoration: none;
   margin: 2vw;
+  font-weight: 600;
 }
 
 nav.navbar .logo {
