@@ -18,7 +18,10 @@ export default function Home() {
       <Navigator></Navigator>
       <div className={styles.center}>
         <main className={styles.main}>
-          <div></div>
+          <h1>로그인</h1>
+          <input type='text' placeholder='이름'></input>
+          <input type='password' placeholder='비밀번호'></input>
+          <button>로그인</button>
         </main>
       </div>
     </>
