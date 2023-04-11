@@ -1,11 +1,25 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useRef } from 'react'
 
 import styles from '@/styles/Login.module.css'
 
 import Navigator from './components/Navigator'
 
+import { userToken } from './lib/userToken'
+
 export default function Home() {
+  const name = useRef<HTMLInputElement>(null)
+  const password = useRef<HTMLInputElement>(null)
+  
+  async function handleLogin() {
+    const res = await fetch(`/api/login?name=${name.current?.value}&password=${password.current?.value}`)
+    const data = await res.json()
+    if (data.StatusCode == 200) {
+      userToken.id = data.id
+    }
+  }
+
   return (
     <>
       <Head>
@@ -19,9 +33,9 @@ export default function Home() {
       <div className={styles.center}>
         <main className={styles.main}>
           <h1>로그인</h1>
-          <input type='text' placeholder='이름'></input>
-          <input type='password' placeholder='비밀번호'></input>
-          <button>로그인</button>
+          <input ref={name} type='text' placeholder='이름'></input>
+          <input ref={password} type='password' placeholder='비밀번호'></input>
+          <button onClick={handleLogin}>로그인</button>
         </main>
       </div>
     </>

@@ -5,7 +5,8 @@ import client from '../lib/client'
 type Data = {
   StatusCode: number,
   error?: string,
-  message: string
+  message: string,
+  name: string
 }
 
 export default async function handler(
@@ -23,12 +24,14 @@ export default async function handler(
       res.json({
         StatusCode: 200,
         message: `user ${data[0].name} login successfully`,
+        name: data[0].name || 'failed',
       })
     } else {
       res.json({
         StatusCode: 401,
         message: 'login failed',
-        error: 'username or password is incorrect'
+        error: 'username or password is incorrect',
+        name: 'failed'
       })
     }
   }
