@@ -2,7 +2,8 @@ main.main {
   max-width: 1080px;
   text-align: left;
   height: 100vh;
-  padding: 100px 100px 100px 100px;
+  padding: 20vh 10vw;
+  margin-bottom: 30vh;
 }
 
 div.center {
@@ -80,4 +81,26 @@ div.notice {
   gap: 5px;
   font-size: 1.2rem;
   font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+  span.money {
+    font-size: 5rem;
+    line-height: 4rem;
+  }
+
+  section.content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  div.card {
+    box-shadow: none;
+    background-color: #e3e5ef;
+  }
+
+  div.card:nth-child(2), div.card:nth-child(3) {
+    border-radius: 30px;
+    background-color: transparent;
+  }
 }
