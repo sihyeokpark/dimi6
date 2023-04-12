@@ -18,8 +18,10 @@ export default function Home() {
     const data = await res.json()
     console.log(data)
     if (data.StatusCode == 200) {
-      (pointText as any).current.innerText = data.point
-      console.log(data.point)
+      if (pointText.current !== null) {    
+        (pointText as any).current.innerText = data.point
+        console.log(data.point)
+      }
     } else {
       alert('로그인에 실패했습니다.')
     }
@@ -41,6 +43,9 @@ export default function Home() {
             <p>한국디지털미디어고등학교</p>
             <h1>1학년 6반 포인트 시스템</h1>
           </div>
+          <div className={styles.notice}>
+          <img src='megaphone.png' height={30}></img><p>다음주 화요일까지 학생종합 평가를 실시하세요</p>
+          </div>
           {(userToken.name !== '') &&
             (<section className={styles.content}>
               <div className={styles.card}>
@@ -60,7 +65,7 @@ export default function Home() {
             </section>)
           }
           {(userToken.name === '') &&
-            (<section className={styles.content}>
+            (<section className={styles.text}>
               <h1>로그인이 필요합니다.</h1>
             </section>)}
         </main>

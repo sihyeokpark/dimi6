@@ -66,3 +66,18 @@ span.money {
 h1.moneyTitle {
   font-size: 2rem;
 }
+
+div.notice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  border-radius: 30px;
+  background-color: #e3e5ef;
+  margin-bottom: 30px;
+  padding: 10px;
+  color: var(--txt-color);
+  gap: 5px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
