@@ -9,14 +9,22 @@ import Navigator from './components/Navigator'
 import { userToken } from './lib/userToken'
 
 export default function Home() {
+  const router = useRouter()
   const name = useRef<HTMLInputElement>(null)
   const password = useRef<HTMLInputElement>(null)
   
   async function handleLogin() {
     const res = await fetch(`/api/login?name=${name.current?.value}&password=${password.current?.value}`)
     const data = await res.json()
+    console.log(data)
     if (data.StatusCode == 200) {
-      userToken.id = data.id
+      userToken.name = data.name
+      console.log(userToken)
+      router.push('/')
+    } else {
+      userToken.name = ''
+      console.log(userToken)
+      alert('로그인에 실패했습니다.')
     }
   }
 

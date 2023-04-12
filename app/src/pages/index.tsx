@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useRef } from 'react'
 
 import styles from '@/styles/Home.module.css'
 
@@ -8,6 +9,22 @@ import Navigator from './components/Navigator'
 import { userToken } from './lib/userToken'
 
 export default function Home() {
+  const pointText = useRef<HTMLHeadingElement>(null)
+  console.log(userToken)
+  getToken()
+
+  async function getToken() {
+    const res = await fetch(`/api/getPoint?name=${userToken.name ?? '!'}`)
+    const data = await res.json()
+    console.log(data)
+    if (data.StatusCode == 200) {
+      (pointText as any).current.innerText = data.point
+      console.log(data.point)
+    } else {
+      alert('로그인에 실패했습니다.')
+    }
+  }
+
   return (
     <>
       <Head>
@@ -24,22 +41,28 @@ export default function Home() {
             <p>한국디지털미디어고등학교</p>
             <h1>1학년 6반 포인트 시스템</h1>
           </div>
-          <section className={styles.content}>
-            <div className={styles.card}>
-              <div className={styles.row}>
-                <h1 className={styles.point}>포인트</h1>
-                <h1 className={styles.moneyTitle}><span className={styles.money}>3400</span>p</h1>
+          {(userToken.name !== '') &&
+            (<section className={styles.content}>
+              <div className={styles.card}>
+                <div className={styles.row}>
+                  <h1 className={styles.point}>포인트</h1>
+                  <h1 className={styles.moneyTitle}><span ref={pointText} className={styles.money}></span>p</h1>
+                </div>
               </div>
-            </div>
-            <div className={styles.card}>
-              <h1>이벤트</h1>
-              <p>10월 22일 박시혁의 생일</p>
-            </div>
-            <div className={styles.card}>
-              <h1>오늘의 제제쌤</h1>
-              <p>좋은 제자에게는 좋은 코치가 있다. </p>
-            </div>
-          </section>
+              <div className={styles.card}>
+                <h1>이벤트</h1>
+                <p>10월 22일 박시혁의 생일</p>
+              </div>
+              <div className={styles.card}>
+                <h1>오늘의 제제쌤</h1>
+                <p>좋은 제자에게는 좋은 코치가 있다. </p>
+              </div>
+            </section>)
+          }
+          {(userToken.name === '') &&
+            (<section className={styles.content}>
+              <h1>로그인이 필요합니다.</h1>
+            </section>)}
         </main>
       </div>
     </>
