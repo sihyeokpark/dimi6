@@ -18,10 +18,12 @@ export default async function handler(
         name: req.query.name as string
       }
     })
-    res.json({
-      StatusCode: 200,
-      point: data[0].point
-    })
+    if (data.length != 0) {
+      res.json({
+        StatusCode: 200,
+        point: data[0].point
+      })
+    }
   } else {
     res.json({
       StatusCode: 405,
