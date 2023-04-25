@@ -1,5 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
+import crypto from 'crypto'
+
 import client from '../lib/client'
 
 type Data = {
@@ -14,10 +16,12 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   if (req.method == 'GET') {
+    const crytoPassword = crypto.createHash('sha256').digest('base64')
+    console.log(crytoPassword)
     const data = await client.user.findMany({
       where: {
-        name: req.query.name as string,
-        password: req.query.password as string
+        name: req.query.password as string,
+        password: crytoPassword
       }
     })
     if (data.length === 1) {
