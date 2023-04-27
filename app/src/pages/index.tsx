@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import { useRef } from 'react'
-import { RefObject } from 'react'
+import { useRef, RefObject, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import styles from '@/styles/Home.module.css'
@@ -11,8 +10,11 @@ import { userToken } from './lib/userToken'
 
 export default function Home() {
   const pointText = useRef<HTMLHeadingElement>(null)
-  console.log(userToken)
-  getToken()
+
+  useEffect(() => {
+    console.log(userToken)
+    getToken()
+  }, [])
 
   async function getToken() {
     if (userToken.name === '') return

@@ -4,23 +4,30 @@ import crypto from 'crypto'
 
 import client from '../lib/client'
 
-type Data = {
+type ResponseDataType = {
   StatusCode: number,
   error?: string,
   message: string,
   name: string
 }
 
+interface iRequest extends NextApiRequest {
+  query: {
+    name: string,
+    password: string
+  }
+}
+
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
+  req: iRequest,
+  res: NextApiResponse<ResponseDataType>
 ) {
   if (req.method == 'GET') {
-    const crytoPassword = crypto.createHash('sha256').digest('base64')
+    const crytoPassword = crypto.createHash('sha256').update(req.query.password).digest('hex')
     console.log(crytoPassword)
     const data = await client.user.findMany({
       where: {
-        name: req.query.password as string,
+        name: req.query.name,
         password: crytoPassword
       }
     })
