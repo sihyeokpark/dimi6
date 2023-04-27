@@ -5,7 +5,7 @@ main.main {
   align-items: center;
   max-width: 1080px;
   text-align: left;
-  height: 100vh;
+  height: calc(100dvh-70px);
   padding: 100px 100px 100px 100px;
   gap: 20px;
 }

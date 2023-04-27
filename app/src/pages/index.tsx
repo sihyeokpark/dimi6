@@ -1,6 +1,7 @@
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import { useRef } from 'react'
+import { RefObject } from 'react'
+import { useRouter } from 'next/router'
 
 import styles from '@/styles/Home.module.css'
 
@@ -14,14 +15,13 @@ export default function Home() {
   getToken()
 
   async function getToken() {
+    if (userToken.name === '') return
     const res = await fetch(`/api/getPoint?name=${userToken.name ?? '!'}`)
     const data = await res.json()
     console.log(data)
     if (data.StatusCode == 200) {
-      if (pointText.current !== null) {    
-        (pointText as any).current.innerText = data.point
-        console.log(data.point)
-      }
+      (pointText as RefObject<HTMLHeadingElement>).current!.innerText = data.point
+      console.log(data.point)
     } else {
       alert('로그인에 실패했습니다.')
     }
