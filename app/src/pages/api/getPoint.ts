@@ -4,18 +4,24 @@ import client from '../lib/client'
 
 type Data = {
   StatusCode: number,
-  point: number,
+  point?: number,
   error?: string
 }
 
+interface iRequest extends NextApiRequest {
+  query: {
+    name: string
+  }
+}
+
 export default async function handler(
-  req: NextApiRequest,
+  req: iRequest,
   res: NextApiResponse<Data>
 ) {
   if (req.method == 'GET') {
     const data = await client.user.findMany({
       where: {
-        name: req.query.name as string
+        name: req.query.name
       }
     })
     if (data.length != 0) {
@@ -28,7 +34,6 @@ export default async function handler(
     res.json({
       StatusCode: 405,
       error: 'only POST method is allowed',
-      point: -1
     })
   }
 }

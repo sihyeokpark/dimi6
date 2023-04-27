@@ -18,14 +18,12 @@ export default function Home() {
 
   async function getToken() {
     if (userToken.name === '') return
-    const res = await fetch(`/api/getPoint?name=${userToken.name ?? '!'}`)
-    const data = await res.json()
-    console.log(data)
+    const data = await (await fetch(`/api/getPoint?name=${userToken.name}`)).json()
     if (data.StatusCode == 200) {
       (pointText as RefObject<HTMLHeadingElement>).current!.innerText = data.point
       console.log(data.point)
     } else {
-      alert('로그인에 실패했습니다.')
+      alert(`로그인에 실패했습니다.\nError ${data.error}`)
     }
   }
 
