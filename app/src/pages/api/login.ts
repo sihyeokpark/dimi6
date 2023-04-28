@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import crypto from 'crypto'
 
 import client from '../lib/client'
+import Jwt from '../lib/jwt'
 
 type ResponseDataType = {
   StatusCode: number,
@@ -32,6 +33,8 @@ export default async function handler(
       }
     })
     if (data.length === 1) {
+      const jwt = new Jwt(data[0].name as string)
+      console.log(jwt.getJwt())
       res.json({
         StatusCode: 200,
         message: `user ${data[0].name} login successfully`,
