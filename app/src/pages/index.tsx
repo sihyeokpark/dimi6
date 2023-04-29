@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useRef, RefObject, useEffect, useState } from 'react'
+import { useRef, RefObject, useEffect, useState, MutableRefObject } from 'react'
 import { useRouter } from 'next/router'
 
 import styles from '@/styles/Home.module.css'
@@ -8,7 +8,7 @@ import Navigator from './components/Navigator'
 
 export default function Home() {
   const [isLogin, setIsLogin] = useState(false)
-  const pointText = useRef<HTMLHeadingElement>(null)
+  const pointText = useRef<HTMLHeadingElement | {}>({})
 
   useEffect(() => {
     verify()
@@ -30,10 +30,8 @@ export default function Home() {
     const token = localStorage.getItem('token')
     if (token === '') return
     const data = await (await fetch(`/api/getPoint?token=${token}`)).json()
-    console.log(data)
     if (data.StatusCode == 200) {
       (pointText as RefObject<HTMLHeadingElement>).current!.innerText = data.point
-      console.log(data.point)
     } else {
       alert(`로그인에 실패했습니다.\nError ${data.error}`)
     }
@@ -63,7 +61,7 @@ export default function Home() {
               <div className={styles.card}>
                 <div className={styles.row}>
                   <h1 className={styles.point}>포인트</h1>
-                  <h1 className={styles.moneyTitle}><span ref={pointText} className={styles.money}></span>p</h1>
+                  <h1 className={styles.moneyTitle}><span ref={pointText as MutableRefObject<HTMLHeadingElement>} className={styles.money}></span>p</h1>
                 </div>
               </div>
               <div className={styles.card}>
