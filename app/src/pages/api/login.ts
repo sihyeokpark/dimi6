@@ -2,8 +2,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import crypto from 'crypto'
 
-import client from '../lib/client'
-import Jwt from '../lib/jwt'
+import client from '../../lib/client'
+import Jwt from '../../lib/jwt'
 
 type ResponseDataType = {
   StatusCode: number,
