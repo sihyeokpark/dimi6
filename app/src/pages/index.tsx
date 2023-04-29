@@ -1,24 +1,36 @@
 import Head from 'next/head'
-import { useRef, RefObject, useEffect } from 'react'
+import { useRef, RefObject, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import styles from '@/styles/Home.module.css'
 
 import Navigator from './components/Navigator'
 
-import { userToken } from './lib/userToken'
-
 export default function Home() {
+  const [isLogin, setIsLogin] = useState(false)
   const pointText = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => {
-    console.log(userToken)
-    getToken()
+    verify()
+    getPoint()
   }, [])
 
-  async function getToken() {
-    if (userToken.name === '') return
-    const data = await (await fetch(`/api/getPoint?name=${userToken.name}`)).json()
+  async function verify() {
+    const token = localStorage.getItem('token')
+    if (token === '') return false
+    const data = await (await fetch(`/api/verify?token=${token}`)).json()
+    if (data.StatusCode == 200) {
+      setIsLogin(true)
+    } else {
+      setIsLogin(false)
+    }
+  }
+
+  async function getPoint() {
+    const token = localStorage.getItem('token')
+    if (token === '') return
+    const data = await (await fetch(`/api/getPoint?token=${token}`)).json()
+    console.log(data)
     if (data.StatusCode == 200) {
       (pointText as RefObject<HTMLHeadingElement>).current!.innerText = data.point
       console.log(data.point)
@@ -46,7 +58,7 @@ export default function Home() {
           <div className={styles.notice}>
           <img src='megaphone.png' height={30}></img><p>다음주 화요일까지 학생종합 평가를 실시하세요</p>
           </div>
-          {(userToken.name !== '') &&
+          {(isLogin) &&
             (<section className={styles.content}>
               <div className={styles.card}>
                 <div className={styles.row}>
@@ -64,7 +76,7 @@ export default function Home() {
               </div>
             </section>)
           }
-          {(userToken.name === '') &&
+          {(!isLogin) &&
             (<section className={styles.text}>
               <h1>로그인이 필요합니다.</h1>
             </section>)}

@@ -3,13 +3,13 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import base64url from 'base64url'
 import crypto from 'crypto'
 
-import Jwt, { JwtStatusCode } from '../lib/jwt'
 import client from '../lib/client'
+import Jwt, { JwtStatusCode } from '../lib/jwt'
 
-type Data = {
+type ResponseDataType = {
   StatusCode: number,
-  point?: number,
-  error?: string
+  name?: string,
+  error?: string,
 }
 
 interface iRequest extends NextApiRequest {
@@ -20,7 +20,7 @@ interface iRequest extends NextApiRequest {
 
 export default async function handler(
   req: iRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<ResponseDataType>
 ) {
   if (req.method == 'GET') {
     const token = req.query.token
@@ -32,20 +32,8 @@ export default async function handler(
     } else if (verifyResult === JwtStatusCode.TokenInvalid) {
       res.json({ StatusCode: 401, error: 'token invalid', })
       return
+    } else {
+      res.json({ StatusCode: 200, name: tokenData.name })
     }
-    const data = await client.user.findMany({
-      where: { name: tokenData.name }
-    })
-    if (data.length != 0) {
-      res.json({
-        StatusCode: 200,
-        point: data[0].point
-      })
-    }
-  } else {
-    res.json({
-      StatusCode: 405,
-      error: 'only POST method is allowed',
-    })
   }
 }
