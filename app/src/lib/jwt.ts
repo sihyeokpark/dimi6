@@ -31,7 +31,7 @@ export default class Jwt {
     return this.header + '.' + this.payload + '.' + this.signature
   }
 }
-//1682742917419
+
 export enum JwtStatusCode {
   OK = 0,
   TokenExpired = 1,
