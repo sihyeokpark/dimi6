@@ -17,7 +17,7 @@ export default function Home() {
       localStorage.setItem('token', data.token)
       router.push('/')
     } else {
-      alert('로그인에 실패했습니다.')
+      alert(`로그인에 실패했습니다.\nError ${data.error}`)
     }
   }
 
