@@ -25,7 +25,6 @@ export default async function handler(
 ) {
   if (req.method == 'GET') {
     const crytoPassword = crypto.createHash('sha256').update(req.query.password).digest('hex')
-    console.log(crytoPassword)
     const data = await client.user.findMany({
       where: {
         name: req.query.name,
@@ -34,7 +33,6 @@ export default async function handler(
     })
     if (data.length === 1) {
       const jwt = new Jwt(data[0].name as string)
-      console.log(jwt.getJwt())
       res.json({
         StatusCode: 200,
         message: `user ${data[0].name} login successfully`,

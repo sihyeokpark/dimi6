@@ -12,7 +12,6 @@ export default function Home() {
 
   useEffect(() => {
     verify()
-    getPoint()
   }, [])
 
   async function verify() {
@@ -24,6 +23,7 @@ export default function Home() {
     } else {
       setIsLogin(false)
     }
+    getPoint()
   }
 
   async function getPoint() {
@@ -31,6 +31,7 @@ export default function Home() {
     if (token === '') return
     const data = await (await fetch(`/api/getPoint?token=${token}`)).json()
     if (data.StatusCode == 200) {
+      console.log(pointText.current);
       (pointText as RefObject<HTMLHeadingElement>).current!.innerText = data.point
     } else {
       alert(`로그인에 실패했습니다.\nError ${data.error}`)
