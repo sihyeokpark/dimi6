@@ -1,0 +1,46 @@
+.main {
+  max-width: 1080px;
+  text-align: center;
+  margin-top: 40px;
+  padding: 5px 8px;
+}
+
+div.center {
+  margin: 0 auto;
+  max-width: 1080px;
+  text-align: left;
+}
+
+section.items {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  place-items: stretch start;
+  justify-content: space-around;
+  gap: 10px;
+  -webkit-box-align: stretch;
+}
+
+div.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 15px;
+  min-width: 200px;
+  max-width: 400px;
+  height: 320px;
+  background-color: #e3e5ef;
+  border-radius: 20px;
+  border: #e3e5ef solid 1px;
+  gap: 10px;
+}
+
+div.item .itemImage {
+  width: 50px;
+  height: 50px;
+}
+
+div.item p {
+  flex: 1 0 0px;
+  margin-bottom: 16px;
+}

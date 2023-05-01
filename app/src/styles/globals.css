@@ -11,6 +11,11 @@
   -moz-user-select:none;
   -ms-user-select:none;
   user-select:none
+  
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 @media (prefers-color-scheme: dark) {

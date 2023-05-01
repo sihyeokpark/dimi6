@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 
-import styles from '@/styles/Login.module.css'
+import styles from '@/styles/login.module.css'
 
 import Navigator from './components/Navigator'
 
