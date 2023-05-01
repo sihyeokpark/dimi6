@@ -6,7 +6,7 @@ import styles from '@/styles/login.module.css'
 
 import Navigator from './components/Navigator'
 
-export default function Home() {
+export default function login() {
   const router = useRouter()
   const name = useRef<HTMLInputElement>(null)
   const password = useRef<HTMLInputElement>(null)

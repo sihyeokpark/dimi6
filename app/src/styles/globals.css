@@ -33,6 +33,11 @@ input {
   padding: 14px 24px;
 }
 
+select:focus, input:focus, button:focus {
+  border: none;
+  outline: none;
+}
+
 button {
   padding: 14px 24px;
   border-radius: 99px;

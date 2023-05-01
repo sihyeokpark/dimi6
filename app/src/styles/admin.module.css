@@ -1,0 +1,43 @@
+main.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 1080px;
+  text-align: left;
+  padding: 100px 100px 100px 100px;
+  gap: 20px;
+}
+
+div.center {
+  margin: 0 auto;
+  max-width: 1080px;
+  text-align: left;
+}
+
+section.section {
+  display: flex;
+  flex-direction: column;
+  border: #dee0ec solid 2px;
+  padding: 24px 24px;
+  border-radius: 20px;
+  gap: 15px;
+}
+
+select.select {
+  font-size: 16px;
+  padding: 14px 24px;
+  border-radius: 99px;
+  background-color: #dee0ec;
+  color:black;
+  border: none;
+  -o-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select.select:focus {
+  border: none;
+  outline: none;
+}
