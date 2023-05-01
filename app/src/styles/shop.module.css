@@ -9,6 +9,7 @@ div.center {
   margin: 0 auto;
   max-width: 1080px;
   text-align: left;
+  padding-bottom: 100px;
 }
 
 section.items {
@@ -26,9 +27,8 @@ div.item {
   flex-direction: column;
   align-items: center;
   padding: 40px 15px;
-  min-width: 200px;
-  max-width: 400px;
-  height: 320px;
+  min-height: 320px;
+  width: 100%;
   background-color: #e3e5ef;
   border-radius: 20px;
   border: #e3e5ef solid 1px;
@@ -43,4 +43,11 @@ div.item .itemImage {
 div.item p {
   flex: 1 0 0px;
   margin-bottom: 16px;
+}
+
+div.flex {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  vertical-align: middle;
 }

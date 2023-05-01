@@ -49,7 +49,7 @@ export default function Home() {
             <h1>1학년 6반 포인트 시스템</h1>
           </div>
           <div className={styles.notice}>
-          <img src='megaphone.png' height={30}></img><p>다음주 화요일까지 학생종합 평가를 실시하세요</p>
+          <img src='img/megaphone.png' height={30}></img><p>다음주 화요일까지 학생종합 평가를 실시하세요</p>
           </div>
           {(isLogin) &&
             (<section className={styles.content}>
@@ -61,7 +61,8 @@ export default function Home() {
               </div>
               <div className={styles.card}>
                 <h1>이벤트</h1>
-                <p>10월 22일 박시혁의 생일</p>
+                <p><b>10월 22일</b> 박시혁의 생일</p>
+                <p><b>11월 5일</b> 주한결의 생일</p>
               </div>
               <div className={styles.card}>
                 <h1>오늘의 제제쌤</h1>

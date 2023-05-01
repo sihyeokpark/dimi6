@@ -5,7 +5,7 @@ export default function Navigator() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.left}>
-        <Link href="/"><img src='./logo.png'></img></Link>
+        <Link href="/"><img src='img/logo.png'></img></Link>
         {/* <a className={styles.logo}>Dimi6</a> */}
       </div>
       <div className={styles.right}>

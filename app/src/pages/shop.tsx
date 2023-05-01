@@ -24,39 +24,63 @@ export default function Home() {
           <h1>교환소</h1>
           <section className={styles.items}>
             <div className={styles.item}>
-              <img src='logo.png' className={styles.itemImage}/>
+              <img src='img/logo.png' className={styles.itemImage}/>
               <h2>아이템1</h2>
-              <p>이 습니다fffffffffffffffffffffffffffff!</p>
+              <p>이 아이템은 세상에서 가장 좋은 것이라고 불리우는 다리우스의 것입니다.</p>
+              <div className={styles.flex}>
+                <img src='img/coin-small.svg' height={20}></img>
+                <p><b>1000p</b></p>
+              </div>
               <button>구매하기</button>
             </div>
             <div className={styles.item}>
-              <img src='logo.png' className={styles.itemImage}/>
+              <img src='img/logo.png' className={styles.itemImage}/>
               <h2>아이템1</h2>
               <p>이 아이템을 사용하시면 안녕하세ffffffffffffffffffffffffffffffffffff요 입니다! 또한 그러세요를 입력하여 주무실 수 있습니다!</p>
+              <div className={styles.flex}>
+                <img src='img/coin-small.svg' height={20}></img>
+                <p><b>1000p</b></p>
+              </div>
               <button>구매하기</button>
             </div>
             <div className={styles.item}>
-              <img src='logo.png' className={styles.itemImage}/>
+              <img src='img/logo.png' className={styles.itemImage}/>
               <h2>아이템1</h2>
               <p>이 아이템을 사용하시면 안녕하세요 입니다! 또한 그러세요를 입력하여 주무실 수 있습니다!</p>
+              <div className={styles.flex}>
+                <img src='img/coin-small.svg' height={20}></img>
+                <p><b>1000p</b></p>
+              </div>
               <button>구매하기</button>
             </div>
             <div className={styles.item}>
-              <img src='logo.png' className={styles.itemImage}/>
+              <img src='img/logo.png' className={styles.itemImage}/>
               <h2>아이템1</h2>
               <p>이 아이템을 사용하시면 안녕하세요 입니다! 또한 그러세요를 입력하여 주무실 수 있습니다!</p>
+              <div className={styles.flex}>
+                <img src='img/coin-small.svg' height={20}></img>
+                <p><b>1000p</b></p>
+              </div>
               <button>구매하기</button>
             </div>
             <div className={styles.item}>
-              <img src='logo.png' className={styles.itemImage}/>
+              <img src='img/logo.png' className={styles.itemImage}/>
               <h2>아이템1</h2>
               <p>이 아이템을 사용하시면 안녕하세요 입니다! 또한 그러세요를 입력하여 주무실 수 있습니다!</p>
+              <div className={styles.flex}>
+                <img src='img/coin-small.svg' height={20}></img>
+                <p><b>1000p</b></p>
+              </div>
               <button>구매하기</button>
             </div>
             <div className={styles.item}>
-              <img src='logo.png' className={styles.itemImage}/>
+              <img src='img/logo.png' className={styles.itemImage}/>
               <h2>아이템1</h2>
               <p>이 아이템을 사용하시면 안녕하세요 입니다! 또한 그러세요를 입력하여 주무실 수 있습니다!</p>
+              <div className={styles.flex}>
+                <img src='img/coin-small.svg' height={20}></img>
+                <p><b>1000p</b></p>
+              </div>
               <button>구매하기</button>
             </div>
           </section>
