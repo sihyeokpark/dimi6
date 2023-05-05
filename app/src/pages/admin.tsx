@@ -12,6 +12,9 @@ export default function admin() {
   const router = useRouter()
   const [isAdmin, setIsAdmin] = useState(false)
 
+  const name = useRef<HTMLSelectElement | null>(null)
+  const money = useRef<HTMLInputElement | null>(null)
+
   useEffect(() => {
     verify()
   }, [])
@@ -25,6 +28,16 @@ export default function admin() {
       alert('관리자만 접근 가능합니다.')
       router.push('/')
       setIsAdmin(false)
+    }
+  }
+
+  async function send() {
+    if (!isAdmin) return false
+    const data = await (await fetch(`/api/point/send?from=${localStorage.getItem('token')}&to=${name.current?.value}&money=${money.current?.value}`)).json()
+    if (data.StatusCode == 200) {
+      alert('성공적으로 포인트를 전송했습니다.\n' + data.message)
+    } else {
+      alert('오류가 발생했습니다.\n' + data.error)
     }
   }
 
@@ -45,13 +58,13 @@ export default function admin() {
             <div>
               <section className={styles.section}>
                 <h2>포인트 전송</h2>
-                <input type='number' placeholder='1000'></input>
-                <select className={styles.select}>
+                <input ref={money} type='number' placeholder='1000'></input>
+                <select ref={name} className={styles.select}>
                   {members.map((member) => (
                     <option value={member}>{member}</option>
                   ))}
                 </select>
-                <button>전송</button>
+                <button onClick={send}>전송</button>
               </section>
             </div>
           )}
