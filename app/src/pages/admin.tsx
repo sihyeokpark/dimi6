@@ -6,6 +6,7 @@ import styles from '@/styles/admin.module.css'
 
 import Navigator from './components/Navigator'
 import { members } from '../lib/classMembers'
+import adminMembers from '../data/admin.json'
 
 export default function admin() {
   const router = useRouter()
@@ -19,7 +20,7 @@ export default function admin() {
     const token = localStorage.getItem('token')
     if (token === '') return false
     const data = await (await fetch(`/api/verify?token=${token}`)).json()
-    if (data.StatusCode == 200 && data.name === '박시혁') setIsAdmin(true)
+    if (data.StatusCode == 200 && adminMembers.indexOf(data.name) != -1) setIsAdmin(true)
     else {
       alert('관리자만 접근 가능합니다.')
       router.push('/')
