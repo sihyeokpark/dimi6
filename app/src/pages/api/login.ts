@@ -25,6 +25,11 @@ export default async function handler(
 ) {
   if (req.method == 'GET') {
     const crytoPassword = crypto.createHash('sha256').update(req.query.password).digest('hex')
+    // 프론트 단에서 #이 들어가면 그 이후에 구문이 무시됨.
+    if (!req.query || !req.query.name || !req.query.password) {
+      res.json({ StatusCode: 401, message: 'login failed', error: '# is banned' })
+      return
+    }
     const data = await client.user.findMany({
       where: {
         name: req.query.name,
