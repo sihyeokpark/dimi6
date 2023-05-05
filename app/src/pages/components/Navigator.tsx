@@ -1,4 +1,4 @@
-import styles from '@/styles/navigator.module.css'
+import styles from '@/styles/Navigator.module.css'
 import Link from 'next/link'
 
 export default function Navigator() {
