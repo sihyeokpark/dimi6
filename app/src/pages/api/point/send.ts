@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import base64url from 'base64url'
 
 import Jwt, { JwtStatusCode } from '../../../lib/jwt'
+import adminMembers from '../../../data/admin.json'
 import client from '../../../lib/client'
 
 type Data = {
@@ -40,6 +41,11 @@ export default async function handler(
     })
     if (fromData.length === 0) {
       res.json({ StatusCode: 405, error: 'only POST method is allowed' })
+      return
+    }
+
+    if (adminMembers.indexOf(fromData[0].name as string) === -1) {
+      res.json({ StatusCode: 401, error: 'only admin can send point' })
       return
     }
 
