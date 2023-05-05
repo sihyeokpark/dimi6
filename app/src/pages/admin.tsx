@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useRef, useEffect, useState, RefObject } from 'react'
 
-import styles from '@/styles/admin.module.css'
+import styles from '@/styles/Admin.module.css'
 
 import Navigator from './components/Navigator'
 import { members } from '../lib/classMembers'

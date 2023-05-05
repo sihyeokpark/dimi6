@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useRef, RefObject, useEffect, useState, MutableRefObject } from 'react'
 
-import styles from '@/styles/index.module.css'
+import styles from '@/styles/Home.module.css'
 
 import Navigator from './components/Navigator'
 
