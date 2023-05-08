@@ -26,9 +26,61 @@ nav.navbar .logo {
   font-weight: 700;
 }
 
-nav.navbar div img {
-  border-radius: 100%;
+img.logo {
   vertical-align: middle;
-  height: 45px;
+  height: 30px;
   margin: 2vw;
+}
+
+img.profile {
+  vertical-align: middle;
+  height: 30px;
+  margin: 2vw;
+  border-radius: 100%;
+}
+
+nav.navbar div div.user {
+  visibility: visible;
+  position: absolute;
+  display: flex;
+  height: 200px;
+  width: 200px;
+  top: 60px;
+  left: calc(100vw - 210px - 12vw + 30px);
+  background-color: #e3e5ef;
+  color: #000000;
+  border-radius: 10px;
+  box-shadow: #9a9ba2 0px 1px 5px;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+nav.navbar div div.user h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+nav.navbar div div.user h2::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #b2b4bc;
+  margin: 5px 0 5px 0;
+}
+
+div.flex {
+  display: flex;
+  flex-direction: row;
+  vertical-align: middle;
+  gap: 5px;
+}
+
+nav.navbar div:nth-child(2) div div p {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0;
 }

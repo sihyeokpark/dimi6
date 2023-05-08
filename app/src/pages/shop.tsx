@@ -7,8 +7,6 @@ import styles from '@/styles/shop.module.css'
 import Navigator from './components/Navigator'
 
 export default function shop() {
-
-
   return (
     <>
       <Head>
