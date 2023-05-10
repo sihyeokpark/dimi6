@@ -21,7 +21,11 @@ export default function admin() {
 
   async function verify() {
     const token = localStorage.getItem('token')
-    if (token === '') return false
+    if (token === '') {
+      alert('로그인을 해주세요.')
+      setIsLogin(false)
+      router.push('/')
+    }
     const data = await (await fetch(`/api/user/verify?token=${token}`)).json()
     if (data.StatusCode == 200) setIsLogin(true)
     else {

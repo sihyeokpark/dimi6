@@ -21,7 +21,11 @@ export default function admin() {
 
   async function verify() {
     const token = localStorage.getItem('token')
-    if (token === '') return false
+    if (token === '') {
+      alert('관리자만 접근 가능합니다.')
+      setIsAdmin(false)
+      router.push('/')
+    }
     const data = await (await fetch(`/api/user/verify?token=${token}`)).json()
     if (data.StatusCode == 200 && adminMembers.indexOf(data.name) != -1) setIsAdmin(true)
     else {
