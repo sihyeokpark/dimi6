@@ -12,7 +12,7 @@ export default function login() {
   const password = useRef<HTMLInputElement>(null)
   
   async function handleLogin() {
-    const data = await (await fetch(`/api/login?name=${name.current?.value}&password=${password.current?.value}`)).json()
+    const data = await (await fetch(`/api/user/login?name=${name.current?.value}&password=${password.current?.value}`)).json()
     if (data.StatusCode == 200) {
       localStorage.setItem('token', data.token)
       router.push('/')

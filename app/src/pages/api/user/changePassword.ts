@@ -2,20 +2,19 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import crypto from 'crypto'
 
-import client from '../../lib/client'
-import Jwt from '../../lib/jwt'
+import client from '../../../lib/client'
 
 type ResponseDataType = {
   StatusCode: number,
   error?: string,
   message: string,
-  token?: string
 }
 
 interface iRequest extends NextApiRequest {
   query: {
     name: string,
-    password: string
+    currentPassword: string,
+    newPassword: string,
   }
 }
 
@@ -23,31 +22,34 @@ export default async function handler(
   req: iRequest,
   res: NextApiResponse<ResponseDataType>
 ) {
-  if (req.method == 'GET') {
-    const crytoPassword = crypto.createHash('sha256').update(req.query.password).digest('hex')
+  if (req.method == 'POST') {
+    const crytoPassword = crypto.createHash('sha256').update(req.query.currentPassword).digest('hex')
     // 프론트 단에서 #이 들어가면 그 이후에 구문이 무시됨.
-    if (!req.query || !req.query.name || !req.query.password) {
-      res.json({ StatusCode: 401, message: 'login failed', error: '# is banned' })
-      return
-    }
     const data = await client.user.findMany({
       where: {
         name: req.query.name,
         password: crytoPassword
       }
     })
+    console.log(data)
     if (data.length === 1) {
-      const jwt = new Jwt(data[0].name as string)
+      await client.user.update({
+        where: {
+          name: req.query.name
+        },
+        data: {
+          password: crypto.createHash('sha256').update(req.query.newPassword).digest('hex')
+        }
+      })
       res.json({
         StatusCode: 200,
-        message: `user ${data[0].name} login successfully`,
-        token: jwt.getJwt(),
+        message: `user ${data[0].name} changed password successfully`,
       })
     } else {
       res.json({
         StatusCode: 401,
-        message: 'login failed',
-        error: 'username or password is incorrect',
+        message: 'Change password failed',
+        error: 'Current password is not correct',
       })
     }
   }

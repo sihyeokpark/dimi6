@@ -7,7 +7,8 @@ import Link from 'next/link'
 export default function Navigator() {
   const [isLogin, setIsLogin] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
-  const userModal = useRef<HTMLDivElement>(null)
+  // const userModal = useRef<HTMLDivElement>(null)
+  // const pointText = useRef<HTMLParagraphElement>(null)
 
   useEffect(() => {
     verify()
@@ -16,20 +17,28 @@ export default function Navigator() {
   async function verify() {
     const token = localStorage.getItem('token')
     if (token === '') return false
-    const data = await (await fetch(`/api/verify?token=${token}`)).json()
+    const data = await (await fetch(`/api/user/verify?token=${token}`)).json()
     if (data.StatusCode == 200) {
       setIsLogin(true)
       if (adminMembers.indexOf(data.name) != -1) setIsAdmin(true)
       else setIsAdmin(false)
     }
     else setIsLogin(false)
+    // getPoint()
   }
 
-  function toggleUserModal() {
-    console.log(userModal.current!.style.visibility)
-    if (userModal.current!.style.visibility == 'visible') userModal.current!.style.visibility = 'hidden'
-    else userModal.current!.style.visibility = 'visible'
-  }
+  // function toggleUserModal() {
+  //   console.log(userModal.current!.style.visibility)
+  //   if (userModal.current!.style.visibility == 'visible') userModal.current!.style.visibility = 'hidden'
+  //   else userModal.current!.style.visibility = 'visible'
+  // }
+
+  // async function getPoint() {
+  //   const data = await (await fetch(`/api/point/get?token=${localStorage.getItem('token')}`)).json()
+  //   if (data.StatusCode == 200) {
+  //     pointText.current!.innerText = data.point
+  //   }
+  // }
 
   return (
     <nav className={styles.navbar}>
@@ -42,14 +51,14 @@ export default function Navigator() {
         <Link href="/shop">Shop</Link>
         { isLogin && <a href="/" onClick={() => localStorage.removeItem('token')}>Logout</a> }
         { !isLogin && <Link href="/login">Login</Link> }
-        <img src="img/exon.png" onClick={toggleUserModal} className={styles.profile}></img>
-        <div ref={userModal} className={styles.user}>
+        <Link href='/user'><img src="img/user.png" className={styles.profile}></img></Link>
+        {/* <div ref={userModal} className={styles.user}>
           <h2>1610 박시혁</h2>
           <div className={styles.flex}>
             <img src='img/coin-small.svg' height={20}></img>
-            <p>1000p</p>
+            <p ref={pointText}></p>
           </div>
-        </div>
+        </div> */}
       </div>
     </nav>
   )

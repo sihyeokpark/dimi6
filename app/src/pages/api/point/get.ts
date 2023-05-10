@@ -8,7 +8,8 @@ import client from '../../../lib/client'
 type Data = {
   StatusCode: number,
   point?: number,
-  error?: string
+  error?: string,
+  message: string
 }
 
 interface iRequest extends NextApiRequest {
@@ -26,10 +27,10 @@ export default async function handler(
     const tokenData = JSON.parse(base64url.decode(token.split('.')[1]))
     const verifyResult = Jwt.verify(token)
     if (verifyResult == JwtStatusCode.TokenExpired) {
-      res.json({ StatusCode: 401, error: 'token expired', })
+      res.json({ StatusCode: 401, error: 'Token expired', message: 'Token expired'})
       return
     } else if (verifyResult === JwtStatusCode.TokenInvalid) {
-      res.json({ StatusCode: 401, error: 'token invalid', })
+      res.json({ StatusCode: 401, error: 'Token invalid', message: 'Token invalid' })
       return
     }
     const data = await client.user.findMany({
@@ -38,13 +39,15 @@ export default async function handler(
     if (data.length != 0) {
       res.json({
         StatusCode: 200,
-        point: data[0].point
+        point: data[0].point,
+        message: 'Success'
       })
     }
   } else {
     res.json({
       StatusCode: 405,
-      error: 'only POST method is allowed',
+      error: 'Only POST',
+      message: 'only POST method is allowed'
     })
   }
 }

@@ -16,7 +16,7 @@ export default function Home() {
   async function verify() {
     const token = localStorage.getItem('token')
     if (token === '') return false
-    const data = await (await fetch(`/api/verify?token=${token}`)).json()
+    const data = await (await fetch(`/api/user/verify?token=${token}`)).json()
     if (data.StatusCode == 200) {
       setIsLogin(true)
       getPoint()

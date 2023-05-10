@@ -7,7 +7,7 @@ import client from '../../../lib/client'
 
 type Data = {
   StatusCode: number,
-  message?: string
+  message: string,
   error?: string
 }
 
@@ -28,10 +28,10 @@ export default async function handler(
     const tokenData = JSON.parse(base64url.decode(token.split('.')[1]))
     const verifyResult = Jwt.verify(token)
     if (verifyResult == JwtStatusCode.TokenExpired) {
-      res.json({ StatusCode: 401, error: 'token expired', })
+      res.json({ StatusCode: 401, error: 'Not authenticated', message: 'Token expired'})
       return
     } else if (verifyResult === JwtStatusCode.TokenInvalid) {
-      res.json({ StatusCode: 401, error: 'token invalid', })
+      res.json({ StatusCode: 401, error: 'Not authenticated', message: 'Token invalid'})
       return
     }
 
@@ -39,7 +39,7 @@ export default async function handler(
       where: { name: tokenData.name }
     })
     if (fromData.length === 0) {
-      res.json({ StatusCode: 405, error: 'only POST method is allowed' })
+      res.json({ StatusCode: 405, error: 'only POST', message: 'only POST method is allowed' })
       return
     }
 
@@ -58,7 +58,7 @@ export default async function handler(
       })
       res.json({ StatusCode: 200,  message: `${fromData[0].name} give ${req.query.money} point to ${req.query.to} sucessfully`})
     } else {
-      res.json({ StatusCode: 401, error: 'no enough point' })
+      res.json({ StatusCode: 401, error: 'Not enough point', message: 'Not enough point' })
       return
     }
   }
