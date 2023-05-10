@@ -38,7 +38,7 @@ export default function admin() {
       method: "POST"
     })).json()
     if (data.StatusCode == 200) {
-      alert('성공적으로 비밀번호를 전송했습니다.\n' + data.message)
+      alert('성공적으로 비밀번호를 변경했습니다.\n' + data.message)
     } else {
       alert('오류가 발생했습니다.\n' + data.error)
     }
