@@ -44,6 +44,7 @@ button {
   border: none;
   background: var(--blue);
   font-weight: 700;
+  color: #ffffff;
 }
 
 * {

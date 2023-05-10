@@ -31,7 +31,6 @@ export default async function handler(
         password: crytoPassword
       }
     })
-    console.log(data)
     if (data.length === 1) {
       await client.user.update({
         where: {

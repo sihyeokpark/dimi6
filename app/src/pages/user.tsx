@@ -13,6 +13,7 @@ export default function admin() {
 
   const currentPassword = useRef<HTMLInputElement>(null)
   const newPassword = useRef<HTMLInputElement>(null)
+  const newPasswordAgain = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     verify()
@@ -32,6 +33,10 @@ export default function admin() {
 
   async function changePassword() {
     if (!isLogin) return false
+    if (newPassword.current?.value !== newPasswordAgain.current?.value) {
+      alert('새로운 비밀번호가 일치하지 않습니다.')
+      return false
+    }
     const name = JSON.parse(base64url.decode(localStorage.getItem('token')!.split('.')[1])).name
     console.log(name)
     const data = await (await fetch(`/api/user/changePassword?name=${name}&currentPassword=${currentPassword.current?.value}&newPassword=${newPassword.current?.value}`, {
@@ -63,6 +68,7 @@ export default function admin() {
                 <h2>비밀번호 변경</h2>
                 <input ref={currentPassword} type='password' placeholder='현재 비밀번호'></input>
                 <input ref={newPassword} type='password' placeholder='새로운 비밀번호'></input>
+                <input ref={newPasswordAgain} type='password' placeholder='새로운 비밀번호 다시'></input>
                 <button onClick={changePassword}>비밀번호 변경하기</button>
               </section>
             </div>
