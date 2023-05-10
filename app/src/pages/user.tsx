@@ -21,7 +21,8 @@ export default function admin() {
 
   async function verify() {
     const token = localStorage.getItem('token')
-    if (token === '') {
+    console.log(token)
+    if (token === undefined) {
       alert('로그인을 해주세요.')
       setIsLogin(false)
       router.push('/')
