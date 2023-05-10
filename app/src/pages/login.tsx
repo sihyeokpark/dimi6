@@ -21,6 +21,10 @@ export default function login() {
     }
   }
 
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key == 'Enter') handleLogin()
+  }
+
   return (
     <>
       <Head>
@@ -35,7 +39,7 @@ export default function login() {
         <main className={styles.main}>
           <h1>로그인</h1>
           <input ref={name} type='text' placeholder='이름'></input>
-          <input ref={password} type='password' placeholder='비밀번호'></input>
+          <input ref={password} type='password' placeholder='비밀번호' onKeyDown={handleKeyDown}></input>
           <button onClick={handleLogin}>로그인</button>
         </main>
       </div>

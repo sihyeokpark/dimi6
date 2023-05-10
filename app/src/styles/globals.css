@@ -45,6 +45,7 @@ button {
   background: var(--blue);
   font-weight: 700;
   color: #ffffff;
+  cursor: pointer;
 }
 
 * {

@@ -49,6 +49,10 @@ export default function admin() {
     }
   }
 
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key == 'Enter') changePassword()
+  }
+
   return (
     <>
       <Head>
@@ -68,7 +72,7 @@ export default function admin() {
                 <h2>비밀번호 변경</h2>
                 <input ref={currentPassword} type='password' placeholder='현재 비밀번호'></input>
                 <input ref={newPassword} type='password' placeholder='새로운 비밀번호'></input>
-                <input ref={newPasswordAgain} type='password' placeholder='새로운 비밀번호 다시'></input>
+                <input ref={newPasswordAgain} type='password' placeholder='새로운 비밀번호 다시' onKeyDown={handleKeyDown}></input>
                 <button onClick={changePassword}>비밀번호 변경하기</button>
               </section>
             </div>
