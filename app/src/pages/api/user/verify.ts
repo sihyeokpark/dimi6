@@ -24,6 +24,10 @@ export default async function handler(
 ) {
   if (req.method == 'GET') {
     const token = req.query.token
+    if (token === 'null') {
+      res.json({ StatusCode: 401, error: 'token invalid', })
+      return
+    }
     const tokenData = JSON.parse(base64url.decode(token.split('.')[1]))
     const verifyResult = Jwt.verify(token)
     if (verifyResult == JwtStatusCode.TokenExpired) {
