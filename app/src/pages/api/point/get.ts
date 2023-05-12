@@ -6,7 +6,6 @@ import Jwt, { JwtStatusCode } from '../../../lib/jwt'
 import client from '../../../lib/client'
 
 type Data = {
-  StatusCode: number,
   point?: number,
   error?: string,
   message: string
@@ -27,25 +26,23 @@ export default async function handler(
     const tokenData = JSON.parse(base64url.decode(token.split('.')[1]))
     const verifyResult = Jwt.verify(token)
     if (verifyResult == JwtStatusCode.TokenExpired) {
-      res.json({ StatusCode: 401, error: 'Token expired', message: 'Token expired'})
+      res.status(401).json({ error: 'Token expired', message: 'Token expired'})
       return
     } else if (verifyResult === JwtStatusCode.TokenInvalid) {
-      res.json({ StatusCode: 401, error: 'Token invalid', message: 'Token invalid' })
+      res.status(401).json({ error: 'Token invalid', message: 'Token invalid' })
       return
     }
     const data = await client.user.findMany({
       where: { name: tokenData.name }
     })
     if (data.length != 0) {
-      res.json({
-        StatusCode: 200,
+      res.status(200).json({
         point: data[0].point,
         message: 'Success'
       })
     }
   } else {
-    res.json({
-      StatusCode: 405,
+    res.status(405).json({
       error: 'Only POST',
       message: 'only POST method is allowed'
     })

@@ -37,8 +37,9 @@ export default function Home() {
 
   async function getPoint() {
     const token = localStorage.getItem('token')
-    const data = await (await fetch(`/api/point/get?token=${token}`)).json()
-    if (data.StatusCode == 200) {
+    const res = await fetch(`/api/point/get?token=${token}`)
+    const data = await res.json()
+    if (res.status === 200) {
       (pointText as RefObject<HTMLHeadingElement>).current!.innerText = data.point
     }
   }
