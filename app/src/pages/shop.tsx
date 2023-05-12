@@ -23,11 +23,11 @@ export default function shop() {
           <section className={styles.items}>
             <div className={styles.item}>
               <img src='img/logo.png' className={styles.itemImage}/>
-              <h2>아이템1</h2>
-              <p>이 아이템은 세상에서 가장 좋은 것이라고 불리우는 다리우스의 것입니다.</p>
+              <h2>금요귀가권</h2>
+              <p>금요귀가권</p>
               <div className={styles.flex}>
                 <img src='img/coin-small.svg' height={20}></img>
-                <p><b>1000p</b></p>
+                <p><b>9999p</b></p>
               </div>
               <button>구매하기</button>
             </div>
