@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useRef, useEffect, useState, RefObject } from 'react'
+import { useRef, useEffect, useState } from 'react'
 
 import styles from '@/styles/admin.module.css'
 
@@ -21,13 +21,22 @@ export default function admin() {
 
   async function verify() {
     const token = localStorage.getItem('token')
-    if (token === '') {
+    if (!token) {
       alert('관리자만 접근 가능합니다.')
       setIsAdmin(false)
       router.push('/')
     }
-    const data = await (await fetch(`/api/user/verify?token=${token}`)).json()
-    if (data.StatusCode == 200 && adminMembers.indexOf(data.name) != -1) setIsAdmin(true)
+    const res = await fetch('/api/user/verify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        token: token
+      })
+    })
+    const data = await res.json()
+    if (res.status === 200 && adminMembers.indexOf(data.name) !== -1) setIsAdmin(true)
     else {
       alert('관리자만 접근 가능합니다.')
       router.push('/')
@@ -37,8 +46,19 @@ export default function admin() {
 
   async function send() {
     if (!isAdmin) return false
-    const data = await (await fetch(`/api/point/send?from=${localStorage.getItem('token')}&to=${name.current?.value}&money=${money.current?.value}`)).json()
-    if (data.StatusCode == 200) {
+    const res = await fetch('/api/point/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: localStorage.getItem('token'),
+        to: name.current?.value,
+        money: money.current?.value
+      })
+    })
+    const data = await res.json()
+    if (res.status === 200) {
       alert('성공적으로 포인트를 전송했습니다.\n' + data.message)
     } else {
       alert('오류가 발생했습니다.\n' + data.error)

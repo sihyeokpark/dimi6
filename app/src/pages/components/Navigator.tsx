@@ -17,8 +17,17 @@ export default function Navigator() {
   async function verify() {
     const token = localStorage.getItem('token')
     if (token === '') return false
-    const data = await (await fetch(`/api/user/verify?token=${token}`)).json()
-    if (data.StatusCode == 200) {
+    const res = await fetch('/api/user/verify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        token: token
+      })
+    })
+    const data = await res.json()
+    if (res.status == 200) {
       setIsLogin(true)
       if (adminMembers.indexOf(data.name) != -1) setIsAdmin(true)
       else setIsAdmin(false)

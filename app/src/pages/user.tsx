@@ -27,8 +27,16 @@ export default function admin() {
       setIsLogin(false)
       router.push('/')
     }
-    const data = await (await fetch(`/api/user/verify?token=${token}`)).json()
-    if (data.StatusCode == 200) setIsLogin(true)
+    const res = await fetch('/api/user/verify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        token: token
+      })
+    })
+    if (res.status === 200) setIsLogin(true)
     else {
       alert('로그인을 해주세요.')
       setIsLogin(false)

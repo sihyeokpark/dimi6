@@ -12,9 +12,21 @@ export default function login() {
   const password = useRef<HTMLInputElement>(null)
   
   async function handleLogin() {
-    const data = await (await fetch(`/api/user/login?name=${name.current?.value}&password=${password.current?.value}`)).json()
-    if (data.StatusCode == 200) {
+    const res = await fetch('/api/user/login', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: name.current?.value,
+        password: password.current?.value
+      })
+    })
+    const data = await res.json()
+    console.log(data)
+    if (res.status == 200) {
       localStorage.setItem('token', data.token)
+      console.log(localStorage.getItem('token'))
       router.push('/')
     } else {
       alert(`로그인에 실패했습니다.\nError ${data.error}`)

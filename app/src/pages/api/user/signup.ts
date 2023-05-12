@@ -3,13 +3,20 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import client from '../../../lib/client'
 
 type Data = {
-  StatusCode: number,
   message: string,
   error?: string
 }
 
+interface iRequest extends NextApiRequest {
+  body: {
+    name: string,
+    password: string,
+    email: string
+  }
+}
+
 export default async function handler(
-  req: NextApiRequest,
+  req: iRequest,
   res: NextApiResponse<Data>
 ) {
   if (req.method == 'POST') {
@@ -19,13 +26,11 @@ export default async function handler(
         point: 0
       },
     })
-    res.json({
-      StatusCode: 200,
+    res.status(200).json({
       message: `user ${req.body.name} created successfully`
     })
   } else {
-    res.json({
-      StatusCode: 405,
+    res.status(405).json({
       message: 'method not allowed',
       error: 'only POST method is allowed'
     })

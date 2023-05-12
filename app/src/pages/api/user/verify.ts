@@ -1,19 +1,15 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import base64url from 'base64url'
-import crypto from 'crypto'
 
-import client from '../../../lib/client'
 import Jwt, { JwtStatusCode } from '../../../lib/jwt'
 
 type ResponseDataType = {
-  StatusCode: number,
   name?: string,
   error?: string,
 }
 
 interface iRequest extends NextApiRequest {
-  query: {
+  body: {
     token: string
   }
 }
@@ -22,22 +18,22 @@ export default async function handler(
   req: iRequest,
   res: NextApiResponse<ResponseDataType>
 ) {
-  if (req.method == 'GET') {
-    const token = req.query.token
-    if (token === 'null') {
-      res.json({ StatusCode: 401, error: 'token invalid', })
+  if (req.method == 'POST') {
+    const token = req.body.token
+    if (!token || token === 'null') {
+      res.status(401).json({ error: 'token invalid', })
       return
     }
     const tokenData = JSON.parse(base64url.decode(token.split('.')[1]))
     const verifyResult = Jwt.verify(token)
     if (verifyResult == JwtStatusCode.TokenExpired) {
-      res.json({ StatusCode: 401, error: 'token expired', })
+      res.status(401).json({ error: 'token expired', })
       return
     } else if (verifyResult === JwtStatusCode.TokenInvalid) {
-      res.json({ StatusCode: 401, error: 'token invalid', })
+      res.status(401).json({ error: 'token invalid', })
       return
     } else {
-      res.json({ StatusCode: 200, name: tokenData.name })
+      res.status(200).json({ name: tokenData.name })
     }
   }
 }

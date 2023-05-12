@@ -7,13 +7,12 @@ import adminMembers from '../../../data/admin.json'
 import client from '../../../lib/client'
 
 type Data = {
-  StatusCode: number,
   message?: string
   error?: string
 }
 
 interface iRequest extends NextApiRequest {
-  query: {
+  body: {
     from: string,
     to: string,
     money: string,
@@ -24,15 +23,19 @@ export default async function handler(
   req: iRequest,
   res: NextApiResponse<Data>
 ) {
-  if (req.method == 'GET') {
-    const token = req.query.from
+  if (req.method == 'POST') {
+    const token = req.body.from
+    if (!token || token === 'null') {
+      res.status(401).json({ error: 'token is null', })
+      return
+    }
     const tokenData = JSON.parse(base64url.decode(token.split('.')[1]))
     const verifyResult = Jwt.verify(token)
-    if (verifyResult == JwtStatusCode.TokenExpired) {
-      res.json({ StatusCode: 401, error: 'token expired', })
+    if (verifyResult === JwtStatusCode.TokenExpired) {
+      res.status(401).json({ error: 'token expired', })
       return
     } else if (verifyResult === JwtStatusCode.TokenInvalid) {
-      res.json({ StatusCode: 401, error: 'token invalid', })
+      res.status(401).json({ error: 'token invalid', })
       return
     }
 
@@ -40,27 +43,27 @@ export default async function handler(
       where: { name: tokenData.name }
     })
     if (fromData.length === 0) {
-      res.json({ StatusCode: 405, error: 'only POST method is allowed' })
+      res.status(405).json({ error: 'only POST method is allowed' })
       return
     }
 
     if (adminMembers.indexOf(fromData[0].name as string) === -1) {
-      res.json({ StatusCode: 401, error: 'only admin can send point' })
+      res.status(401).json({ error: 'only admin can send point' })
       return
     }
 
     const toData = await client.user.findMany({
-      where: { name: req.query.to }
+      where: { name: req.body.to }
     })
 
     if (toData.length !== 0) {
       await client.user.update({
-        where: { name: req.query.to } as any, // TODO: fix this
-        data: { point: toData[0].point + parseInt(req.query.money)}
+        where: { name: req.body.to } as any, // TODO: fix this
+        data: { point: toData[0].point + parseInt(req.body.money)}
       })
-      res.json({ StatusCode: 200,  message: `${fromData[0].name} send ${req.query.money} point to ${req.query.to} sucessfully`})
+      res.status(200).json({ message: `${fromData[0].name} send ${req.body.money} point to ${req.body.to} sucessfully`})
     } else {
-      res.json({ StatusCode: 401, error: 'can not find user' })
+      res.status(401).json({ error: 'can not find user' })
       return
     }
   }

@@ -16,8 +16,16 @@ export default function Home() {
   async function verify() {
     const token = localStorage.getItem('token')
     if (token === '') return false
-    const data = await (await fetch(`/api/user/verify?token=${token}`)).json()
-    if (data.StatusCode == 200) {
+    const res = await fetch('/api/user/verify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        token: token
+      })
+    })
+    if (res.status === 200) {
       setIsLogin(true)
       getPoint()
     }
@@ -29,10 +37,8 @@ export default function Home() {
 
   async function getPoint() {
     const token = localStorage.getItem('token')
-    if (token === '') return
     const data = await (await fetch(`/api/point/get?token=${token}`)).json()
     if (data.StatusCode == 200) {
-      console.log(pointText.current);
       (pointText as RefObject<HTMLHeadingElement>).current!.innerText = data.point
     }
   }
