@@ -24,7 +24,7 @@ export default function shop() {
     items.forEach((item: Item, i: number) => {
       setItemArray(itemArray => [...itemArray, 
         <div key={i} className={styles.item}>
-          <img src='img/logo.png' className={styles.itemImage}/>
+          {/* <img src='img/logo.png' className={styles.itemImage}/> */}
           <h2>{item.name}</h2>
           <p>{item.description}</p>
           <div className={styles.flex}>
