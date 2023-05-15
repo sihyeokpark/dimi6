@@ -3,14 +3,37 @@ import Head from 'next/head'
 import styles from '@/styles/shop.module.css'
 
 import Navigator from './components/Navigator'
+import { useEffect, useRef, useState } from 'react'
+import { Item } from '@prisma/client'
 
 export default function shop() {
+  const itemsList = useRef<HTMLDivElement>(null)
+  const [itemArray, setItemArray] = useState<JSX.Element[]>([])
+
+  useEffect(() => {
+    getItems()
+  }, [])
+
   async function getItems() {
-    const res = await fetch('/api/shop/get')
+    const res = await fetch('/api/item/get')
     const data = await res.json()
-    if (res.status === 200) {
-      console.log(data)
-    }
+    if (res.status !== 200) return alert('아이템 목록을 가져올 수 없습니다.')
+    
+    const items = data.item
+    console.log(items)
+    items.forEach((item: Item, i: number) => {
+      setItemArray(itemArray => [...itemArray, 
+        <div key={i} className={styles.item}>
+          <img src='img/logo.png' className={styles.itemImage}/>
+          <h2>{item.name}</h2>
+          <p>{item.description}</p>
+          <div className={styles.flex}>
+            <img src='img/coin-small.svg' height={20}></img>
+            <p><b>{item.price}p</b></p>
+          </div>
+          <button>구매하기</button>
+        </div>])
+    })
   }
 
   return (
@@ -26,21 +49,11 @@ export default function shop() {
       <div className={styles.center}>
         <main className={styles.main}>
           <h1>교환소</h1>
-          <section className={styles.items}>
+          <div ref={itemsList} className={styles.items}>
             {
-              
+              itemArray
             }
-            <div className={styles.item}>
-              <img src='img/logo.png' className={styles.itemImage}/>
-              <h2>금요귀가권</h2>
-              <p>금요귀가권</p>
-              <div className={styles.flex}>
-                <img src='img/coin-small.svg' height={20}></img>
-                <p><b>9999p</b></p>
-              </div>
-              <button>구매하기</button>
-            </div>
-          </section>
+          </div>
         </main>
       </div>
     </>

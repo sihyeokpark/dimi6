@@ -27,21 +27,13 @@ export default async function handler(
     const token = req.query.from
     const tokenData = JSON.parse(base64url.decode(token.split('.')[1]))
     const verifyResult = Jwt.verify(token)
-    if (verifyResult == JwtStatusCode.TokenExpired) {
-      res.json({ StatusCode: 401, error: 'Not authenticated', message: 'Token expired'})
-      return
-    } else if (verifyResult === JwtStatusCode.TokenInvalid) {
-      res.json({ StatusCode: 401, error: 'Not authenticated', message: 'Token invalid'})
-      return
-    }
+    if (verifyResult == JwtStatusCode.TokenExpired) return res.json({ StatusCode: 401, error: 'Not authenticated', message: 'Token expired'})
+    else if (verifyResult === JwtStatusCode.TokenInvalid) return res.json({ StatusCode: 401, error: 'Not authenticated', message: 'Token invalid'})
 
     const fromData = await client.user.findMany({
       where: { name: tokenData.name }
     })
-    if (fromData.length === 0) {
-      res.json({ StatusCode: 405, error: 'only POST', message: 'only POST method is allowed' })
-      return
-    }
+    if (fromData.length === 0) return res.json({ StatusCode: 405, error: 'only POST', message: 'only POST method is allowed' })
 
     const toData = await client.user.findMany({
       where: { name: req.query.to }
@@ -56,10 +48,9 @@ export default async function handler(
         where: { name: req.query.to } as any, // TODO: fix this
         data: { point: toData[0].point + parseInt(req.query.money)}
       })
-      res.json({ StatusCode: 200,  message: `${fromData[0].name} give ${req.query.money} point to ${req.query.to} sucessfully`})
+      return res.json({ StatusCode: 200,  message: `${fromData[0].name} give ${req.query.money} point to ${req.query.to} sucessfully`})
     } else {
-      res.json({ StatusCode: 401, error: 'Not enough point', message: 'Not enough point' })
-      return
+      return res.json({ StatusCode: 401, error: 'Not enough point', message: 'Not enough point' })
     }
   }
 }

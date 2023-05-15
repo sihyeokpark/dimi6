@@ -31,26 +31,15 @@ export default async function handler(
     }
     const tokenData = JSON.parse(base64url.decode(token.split('.')[1]))
     const verifyResult = Jwt.verify(token)
-    if (verifyResult === JwtStatusCode.TokenExpired) {
-      res.status(401).json({ error: 'token expired', })
-      return
-    } else if (verifyResult === JwtStatusCode.TokenInvalid) {
-      res.status(401).json({ error: 'token invalid', })
-      return
-    }
+    if (verifyResult === JwtStatusCode.TokenExpired) return res.status(401).json({ error: 'token expired', })
+    else if (verifyResult === JwtStatusCode.TokenInvalid) return res.status(401).json({ error: 'token invalid', })
 
     const fromData = await client.user.findMany({
       where: { name: tokenData.name }
     })
-    if (fromData.length === 0) {
-      res.status(405).json({ error: 'only POST method is allowed' })
-      return
-    }
+    if (fromData.length === 0) return res.status(405).json({ error: 'only POST method is allowed' })
 
-    if (adminMembers.indexOf(fromData[0].name as string) === -1) {
-      res.status(401).json({ error: 'only admin can send point' })
-      return
-    }
+    if (adminMembers.indexOf(fromData[0].name as string) === -1) return res.status(401).json({ error: 'only admin can send point' })
 
     const toData = await client.user.findMany({
       where: { name: req.body.to }
@@ -61,10 +50,9 @@ export default async function handler(
         where: { name: req.body.to } as any, // TODO: fix this
         data: { point: toData[0].point + parseInt(req.body.money)}
       })
-      res.status(200).json({ message: `${fromData[0].name} send ${req.body.money} point to ${req.body.to} sucessfully`})
+      return res.status(200).json({ message: `${fromData[0].name} send ${req.body.money} point to ${req.body.to} sucessfully`})
     } else {
-      res.status(401).json({ error: 'can not find user' })
-      return
+      return res.status(401).json({ error: 'can not find user' })
     }
   }
 }
