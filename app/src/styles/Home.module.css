@@ -148,4 +148,14 @@ div.notice {
     border-radius: 30px;
     background-color: transparent;
   }
+
+  div.flex {
+    display: flex;
+    flex-direction: column;
+    gap: 10vh;
+  }
+
+  div.mealCard {
+    width: 100%;
+  }
 }
