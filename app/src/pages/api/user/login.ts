@@ -23,7 +23,6 @@ export default async function handler(
   res: NextApiResponse<ResponseDataType>
 ) {
   if (req.method == 'POST') {
-    console.log(req.body)
     const crytoPassword = crypto.createHash('sha256').update(req.body.password).digest('hex')
     // 프론트 단에서 #이 들어가면 그 이후에 구문이 무시됨.
     if (!req.body || !req.body.name || !req.body.password) {

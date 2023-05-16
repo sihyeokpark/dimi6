@@ -30,8 +30,3 @@ model Inventory {
   itemId      Int      @default(0)
   itemCount   Int      @default(0)
 }
-
-model ItemTable {
-  itemId          Int      @id @default(0)
-  itemName        String
-}

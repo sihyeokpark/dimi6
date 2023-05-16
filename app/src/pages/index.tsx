@@ -73,7 +73,7 @@ export default function Home() {
               </div>
               <div className={styles.card}>
                 <h1>이벤트</h1>
-                <p><b>5월 4일</b> 목요 귀가</p>
+                <p><b>8월 31일</b> 박종휘의 생일</p>
                 <p><b>10월 1일</b> 최지윤의 생일</p>
                 <p><b>10월 22일</b> 박시혁의 생일</p>
                 <p><b>11월 5일</b> 주한결의 생일</p>

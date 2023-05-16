@@ -14,6 +14,28 @@ export default function shop() {
     getItems()
   }, [])
 
+  async function buyItem(e: React.MouseEvent<HTMLElement>) {
+    const itemId = e.currentTarget.getAttribute('itemID')
+    if (itemId === null) return alert('아이템을 구매할 수 없습니다.')
+    console.log(itemId)
+    const res = await fetch('/api/item/buy', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        itemId: Number(itemId),
+        token: localStorage.getItem('token')
+      })
+    })
+    const data = await res.json()
+    if (res.status === 200) {
+      alert(`아이템을 구매하였습니다.\n남은 돈: ${data.money}`)
+    } else {
+      alert(`구매에 실패하였습니다.\n${data.error}`)
+    }
+  }
+
   async function getItems() {
     const res = await fetch('/api/item/get')
     const data = await res.json()
@@ -27,11 +49,12 @@ export default function shop() {
           {/* <img src='img/logo.png' className={styles.itemImage}/> */}
           <h2>{item.name}</h2>
           <p>{item.description}</p>
+          <p><b>1개 보유중</b></p>
           <div className={styles.flex}>
             <img src='img/coin-small.svg' height={20}></img>
             <p><b>{item.price}p</b></p>
           </div>
-          <button>구매하기</button>
+          <button itemID={i.toString()} onClick={buyItem}>구매하기</button>
         </div>])
     })
   }
