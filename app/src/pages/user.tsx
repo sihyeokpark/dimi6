@@ -52,8 +52,16 @@ export default function admin() {
     }
     const name = JSON.parse(base64url.decode(localStorage.getItem('token')!.split('.')[1])).name
     console.log(name)
-    const data = await (await fetch(`/api/user/changePassword?name=${name}&currentPassword=${currentPassword.current?.value}&newPassword=${newPassword.current?.value}`, {
-      method: "POST"
+    const data = await (await fetch('/api/user/changePassword', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        currentPassword: currentPassword.current?.value,
+        newPassword: newPassword.current?.value
+      })
     })).json()
     if (data.StatusCode == 200) {
       alert('성공적으로 비밀번호를 변경했습니다.\n' + data.message)

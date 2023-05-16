@@ -10,7 +10,7 @@ type ResponseDataType = {
 }
 
 interface iRequest extends NextApiRequest {
-  query: {
+  body: {
     name: string,
     currentPassword: string,
     newPassword: string,
@@ -22,21 +22,21 @@ export default async function handler(
   res: NextApiResponse<ResponseDataType>
 ) {
   if (req.method == 'POST') {
-    const crytoPassword = crypto.createHash('sha256').update(req.query.currentPassword).digest('hex')
+    const crytoPassword = crypto.createHash('sha256').update(req.body.currentPassword).digest('hex')
     // 프론트 단에서 #이 들어가면 그 이후에 구문이 무시됨.
     const data = await client.user.findMany({
       where: {
-        name: req.query.name,
+        name: req.body.name,
         password: crytoPassword
       }
     })
     if (data.length === 1) {
       await client.user.update({
         where: {
-          name: req.query.name
+          name: req.body.name
         },
         data: {
-          password: crypto.createHash('sha256').update(req.query.newPassword).digest('hex')
+          password: crypto.createHash('sha256').update(req.body.newPassword).digest('hex')
         }
       })
       res.json({

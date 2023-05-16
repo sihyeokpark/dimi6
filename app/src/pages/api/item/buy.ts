@@ -42,8 +42,9 @@ export default async function handler(
     await client.user.update({ where: { name: tokenData.name }, data: { point: user.point - item.price } })
 
     const itemInInventory = await client.inventory.findFirst({ where: { id: user.id, itemId: item.id } })
+    console.log(itemInInventory, user.id, item.id)
     if (itemInInventory) await client.inventory.updateMany({ where: { id: user.id, itemId: item.id }, data: { itemCount: itemInInventory.itemCount + 1 } })
-    else await client.inventory.create({ data: { id: user.id, itemId: item.id, itemCount: 1 } })
+    else await client.inventory.createMany({ data: { id: user.id, itemId: item.id, itemCount: 1 }, skipDuplicates: true })
 
     return res.status(200).json({ money: user.point - item.price })
   } else {

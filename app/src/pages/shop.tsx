@@ -4,7 +4,7 @@ import styles from '@/styles/shop.module.css'
 
 import Navigator from './components/Navigator'
 import { useEffect, useRef, useState } from 'react'
-import { Item } from '@prisma/client'
+import { Inventory, Item } from '@prisma/client'
 
 export default function shop() {
   const itemsList = useRef<HTMLDivElement>(null)
@@ -40,6 +40,23 @@ export default function shop() {
     const res = await fetch('/api/item/get')
     const data = await res.json()
     if (res.status !== 200) return alert('아이템 목록을 가져올 수 없습니다.')
+
+    const inventoryRes = await fetch('/api/item/inventory', {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        token: localStorage.getItem('token')
+      })
+    })
+    const inventoryData = await inventoryRes.json()
+    console.log(inventoryData)
+
+    const inventoryDictionary: {[key: number]: number} = {}
+    inventoryData.item.forEach((item: Inventory) => {
+      inventoryDictionary[item.itemId] = item.itemCount
+    })
     
     const items = data.item
     console.log(items)
@@ -49,7 +66,7 @@ export default function shop() {
           {/* <img src='img/logo.png' className={styles.itemImage}/> */}
           <h2>{item.name}</h2>
           <p>{item.description}</p>
-          <p><b>1개 보유중</b></p>
+          <p><b>{inventoryDictionary[i] ?? 0}개 보유중</b></p>
           <div className={styles.flex}>
             <img src='img/coin-small.svg' height={20}></img>
             <p><b>{item.price}p</b></p>
