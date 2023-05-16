@@ -26,7 +26,8 @@ model Item {
 }
 
 model Inventory {
-  id          Int      @id @default(0)
-  itemId      Int      @default(0)
-  itemCount   Int      @default(0)
+  uid         String      @id @default("")
+  id          Int         @default(0)
+  itemId      Int         @default(0)
+  itemCount   Int         @default(0)
 }

@@ -34,9 +34,18 @@ export default function shop() {
     } else {
       alert(`구매에 실패하였습니다.\n${data.error}`)
     }
+    getItems()
+  }
+
+  async function resetItems(element: HTMLDivElement | null) {
+    while (element?.firstChild) {
+      element.removeChild(element.firstChild);
+    }
   }
 
   async function getItems() {
+    await resetItems(itemsList.current)
+
     const res = await fetch('/api/item/get')
     const data = await res.json()
     if (res.status !== 200) return alert('아이템 목록을 가져올 수 없습니다.')
