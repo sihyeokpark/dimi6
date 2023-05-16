@@ -85,9 +85,62 @@ export default function Home() {
             </section>)
           }
           {(!isLogin) &&
-            (<section className={styles.text}>
+            (<section className={styles.content}>
               <h1>로그인이 필요합니다.</h1>
             </section>)}
+          <div className={styles.flex}>
+            <section className={styles.meal}>
+              <div className={styles.title}>
+                <h1>급식표</h1>
+              </div>
+              <div className={styles.mealDiv}>
+                <h1>아침</h1>
+                <p className={styles.blue}><b>오전 07시 40분</b></p>
+                <div className={styles.mealCard}>
+                  <p>베이글 샌드위치, 차돌박이된장찌개, 떡갈비스틱, 양념깻잎지, 포기김치</p>
+                </div>
+              </div>
+              <div className={styles.mealDiv}>
+                <h1>점심</h1>
+                <p className={styles.blue}><b>오후 01시 00분</b></p>
+                <div className={styles.mealCard}>
+                  <p>베이글 샌드위치, 차돌박이된장찌개, 떡갈비스틱, 양념깻잎지, 포기김치</p>
+                </div>
+              </div>
+              <div className={styles.mealDiv}>
+                <h1>저녁</h1>
+                <p className={styles.blue}><b>오후 06시 53분</b></p>
+                <div className={styles.mealCard}>
+                  <p>베이글 샌드위치, 차돌박이된장찌개, 떡갈비스틱, 양념깻잎지, 포기김치</p>
+                </div>
+              </div>
+            </section>
+            <section className={styles.schedule}>
+              <div className={styles.title}>
+                <h1>시간표</h1>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>월</th>
+                    <th>화</th>
+                    <th>수</th>
+                    <th>목</th>
+                    <th>금</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>테스트</td>
+                    <td>테스트</td>
+                    <td>테스트</td>
+                    <td>테스트</td>
+                    <td>테스트</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
         </main>
       </div>
     </>

@@ -3,7 +3,7 @@ main.main {
   text-align: left;
   height: 100vh;
   padding: 70px 30px;
-  margin-bottom: 30vh;
+  margin-bottom: 10vh;
 }
 
 div.center {
@@ -23,6 +23,22 @@ div.title {
   margin-bottom: 50px;
 }
 
+section.meal h1, section.schedule h1 {
+  font-size: 1.5em;
+}
+
+section.meal {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+div.flex {
+  display: flex;
+  flex-direction: row;
+  gap: 20vw;
+}
+
 section.content {
   display: grid;
   width: 100%;
@@ -30,6 +46,11 @@ section.content {
   grid-template-columns: 3fr 2fr;
   grid-template-rows: 6fr 4fr;
   gap: 20px;
+  margin-bottom: 30vh;
+}
+
+p.blue {
+  color: var(--blue);
 }
 
 div.card:nth-child(1) {
@@ -47,6 +68,29 @@ div.card {
   box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
   border: 1px solid #e3e5ef;
   gap: 5px;
+}
+
+div.mealDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+div.mealCard {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
+  border-radius: 30px;
+  width: 20vw;
+  padding: 20px 20px;
+  color: var(--txt-color);
+  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+  border: 1px solid #e3e5ef;
+  gap: 5px;
+}
+
+section.schedule {
+  margin-bottom: 100vh;
 }
 
 div.card:nth-child(1) {
