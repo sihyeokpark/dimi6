@@ -61,7 +61,7 @@ export default function Home() {
             <h1>1학년 6반 포인트 시스템</h1>
           </div>
           <div className={styles.notice}>
-          <img src='img/megaphone.png' height={30}></img><p>다음주 화요일까지 학생종합 평가를 실시하세요</p>
+          <img src='img/megaphone.png' height={30}></img><p>사이트를 제작 중입니다.</p>
           </div>
           {(isLogin) &&
             (<section className={styles.content}>
