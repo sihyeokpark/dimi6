@@ -57,7 +57,7 @@ export default function Home() {
     const res = await fetch(`/api/point/get?token=${token}`)
     const data = await res.json()
     if (res.status === 200) {
-      (pointText as RefObject<HTMLHeadingElement>).current!.innerText = data.point
+      pointText.current!.innerText = data.point
     }
   }
 
