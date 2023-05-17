@@ -7,10 +7,17 @@ import Navigator from './components/Navigator'
 
 export default function Home() {
   const [isLogin, setIsLogin] = useState(false)
-  const pointText = useRef<HTMLHeadingElement | {}>({})
+  const loginAlertText = useRef<HTMLHeadingElement>(null)
+  const pText = useRef<HTMLHeadingElement>(null)
+  const pointText = useRef<HTMLHeadingElement>(null)
+  const breackfastText = useRef<HTMLParagraphElement>(null)
+  const lunchText = useRef<HTMLParagraphElement>(null)
+  const dinnerText = useRef<HTMLParagraphElement>(null)
+
 
   useEffect(() => {
     verify()
+    getMeal()
   }, [])
 
   async function verify() {
@@ -30,9 +37,19 @@ export default function Home() {
       getPoint()
     }
     else {
+      loginAlertText.current!.innerText = '로그인이 필요합니다.'
+      pointText.current!.innerText = ''
+      pText.current!.innerText = ''
       setIsLogin(false)
       localStorage.removeItem('token')
     }
+  }
+
+  async function getMeal() {
+    const data = await (await fetch('https://xn--299a1v27nvthhjj.com/api/' + new Date().toISOString().split('T')[0])).json()
+    breackfastText.current!.innerText = data.meal.breakfast.replaceAll('2종시리얼/유산균/우유,저지방우유,두유,무설탕두유중택1/', '').replaceAll('/', ', ') // 맨날 똑같은거 제외
+    lunchText.current!.innerText = data.meal.lunch.replaceAll('/', ', ')
+    dinnerText.current!.innerText = data.meal.dinner.replaceAll('/', ', ')
   }
 
   async function getPoint() {
@@ -63,31 +80,25 @@ export default function Home() {
           <div className={styles.notice}>
           <img src='img/megaphone.png' height={30}></img><p>사이트를 제작 중입니다.</p>
           </div>
-          {(isLogin) &&
-            (<section className={styles.content}>
-              <div className={styles.card}>
-                <div className={styles.row}>
-                  <h1 className={styles.point}>포인트</h1>
-                  <h1 className={styles.moneyTitle}><span ref={pointText as MutableRefObject<HTMLHeadingElement>} className={styles.money}></span>p</h1>
-                </div>
+          <section className={styles.content}>
+            <div className={styles.card}>
+              <div className={styles.row}>
+                <h1 ref={loginAlertText} className={styles.point}>포인트</h1>
+                <h1 ref={pText} className={styles.moneyTitle}><span ref={pointText} className={styles.money}></span>p</h1>
               </div>
-              <div className={styles.card}>
-                <h1>이벤트</h1>
-                <p><b>8월 31일</b> 박종휘의 생일</p>
-                <p><b>10월 1일</b> 최지윤의 생일</p>
-                <p><b>10월 22일</b> 박시혁의 생일</p>
-                <p><b>11월 5일</b> 주한결의 생일</p>
-              </div>
-              <div className={styles.card}>
-                <h1>오늘의 제제쌤</h1>
-                <p>좋은 제자에게는 좋은 코치가 있다. </p>
-              </div>
-            </section>)
-          }
-          {(!isLogin) &&
-            (<section className={styles.content}>
-              <h1>로그인이 필요합니다.</h1>
-            </section>)}
+            </div>
+            <div className={styles.card}>
+              <h1>이벤트</h1>
+              <p><b>8월 31일</b> 박종휘의 생일</p>
+              <p><b>10월 1일</b> 최지윤의 생일</p>
+              <p><b>10월 22일</b> 박시혁의 생일</p>
+              <p><b>11월 5일</b> 주한결의 생일</p>
+            </div>
+            <div className={styles.card}>
+              <h1>오늘의 제제쌤</h1>
+              <p>좋은 제자에게는 좋은 코치가 있다. </p>
+            </div>
+          </section>
           <div className={styles.flex}>
             <section className={styles.meal}>
               <div className={styles.title}>
@@ -97,21 +108,21 @@ export default function Home() {
                 <h1>아침</h1>
                 <p className={styles.blue}><b>오전 07시 40분</b></p>
                 <div className={styles.mealCard}>
-                  <p>베이글 샌드위치, 차돌박이된장찌개, 떡갈비스틱, 양념깻잎지, 포기김치</p>
+                  <p ref={breackfastText}>베이글 샌드위치, 차돌박이된장찌개, 떡갈비스틱, 양념깻잎지, 포기김치</p>
                 </div>
               </div>
               <div className={styles.mealDiv}>
                 <h1>점심</h1>
                 <p className={styles.blue}><b>오후 01시 00분</b></p>
                 <div className={styles.mealCard}>
-                  <p>베이글 샌드위치, 차돌박이된장찌개, 떡갈비스틱, 양념깻잎지, 포기김치</p>
+                  <p ref={lunchText}>베이글 샌드위치, 차돌박이된장찌개, 떡갈비스틱, 양념깻잎지, 포기김치</p>
                 </div>
               </div>
               <div className={styles.mealDiv}>
                 <h1>저녁</h1>
                 <p className={styles.blue}><b>오후 06시 53분</b></p>
                 <div className={styles.mealCard}>
-                  <p>베이글 샌드위치, 차돌박이된장찌개, 떡갈비스틱, 양념깻잎지, 포기김치</p>
+                  <p ref={dinnerText}>베이글 샌드위치, 차돌박이된장찌개, 떡갈비스틱, 양념깻잎지, 포기김치</p>
                 </div>
               </div>
             </section>
