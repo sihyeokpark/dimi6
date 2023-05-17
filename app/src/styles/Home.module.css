@@ -46,7 +46,7 @@ section.content {
   grid-template-columns: 3fr 2fr;
   grid-template-rows: 6fr 4fr;
   gap: 20px;
-  margin-bottom: 30vh;
+  margin-bottom: 200px;
 }
 
 p.blue {
