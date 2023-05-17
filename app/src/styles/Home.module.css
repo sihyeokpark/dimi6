@@ -20,7 +20,13 @@ div.title {
   height: fit-content;
   border-left: 4px solid var(--blue);
   padding-left: 10px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+}
+
+div.sectionTitle {
+  height: fit-content;
+  border-left: 4px solid var(--blue);
+  padding-left: 10px;
 }
 
 section.meal h1, section.schedule h1 {

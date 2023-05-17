@@ -101,7 +101,7 @@ export default function Home() {
           </section>
           <div className={styles.flex}>
             <section className={styles.meal}>
-              <div className={styles.title}>
+              <div className={styles.sectionTitle}>
                 <h1>급식표</h1>
               </div>
               <div className={styles.mealDiv}>
@@ -127,7 +127,7 @@ export default function Home() {
               </div>
             </section>
             <section className={styles.schedule}>
-              <div className={styles.title}>
+              <div className={styles.sectionTitle}>
                 <h1>시간표</h1>
               </div>
               <table>
