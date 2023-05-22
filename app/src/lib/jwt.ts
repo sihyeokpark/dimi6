@@ -10,8 +10,8 @@ export default class Jwt {
     this.header = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9' // { "alg": "HS256", "typ": "JWT" }
     this.payload = base64url(`{
       "name": "${name}",
-      "at": ${Date.now()+3600000}
-    }`) // 1시간 뒤 만료
+      "at": ${Date.now()+3600000*24}
+    }`) // 24시간 뒤 만료
     this.signature = base64url(crypto.createHmac('sha256', process.env.JWT_SECRET as string).update(this.header + '.' + this.payload).digest('hex'))
   }
 
