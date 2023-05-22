@@ -7,13 +7,15 @@ import styles from '@/styles/admin.module.css'
 import Navigator from './components/Navigator'
 import { members } from '../lib/classMembers'
 import adminMembers from '../data/admin.json'
+import rules from '../data/rule.json'
 
 export default function admin() {
   const router = useRouter()
   const [isAdmin, setIsAdmin] = useState(false)
 
-  const name = useRef<HTMLSelectElement | null>(null)
-  const money = useRef<HTMLInputElement | null>(null)
+  const name = useRef<HTMLSelectElement>(null)
+  const money = useRef<HTMLInputElement>(null)
+  const ruleSelect = useRef<HTMLSelectElement>(null)
 
   useEffect(() => {
     verify()
@@ -65,6 +67,10 @@ export default function admin() {
     }
   }
 
+  function changePoint(e: React.ChangeEvent<HTMLSelectElement>) {
+    money.current!.value = '-'+e.target.value.split('-')[1]
+  }
+
   return (
     <>
       <Head>
@@ -83,9 +89,14 @@ export default function admin() {
               <section className={styles.section}>
                 <h2>포인트 전송</h2>
                 <input ref={money} type='number' placeholder='1000'></input>
+                <select ref={ruleSelect} onChange={changePoint} className={styles.select}>
+                  {rules.map((rule, index) => (
+                    <option key={index+1} value={rule.name + ' ' + rule.point.toString()}>{`${rule.name} [${rule.point.toString()}]`}</option>
+                  ))}
+                </select>
                 <select ref={name} className={styles.select}>
-                  {members.map((member) => (
-                    <option value={member}>{member}</option>
+                  {members.map((member, index) => (
+                    <option key={index+1} value={member}>{`${index+1} ${member}`}</option>
                   ))}
                 </select>
                 <button onClick={send}>전송</button>
