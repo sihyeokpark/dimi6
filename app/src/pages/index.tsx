@@ -2,8 +2,9 @@ import Head from 'next/head'
 import { useRef, RefObject, useEffect, useState, MutableRefObject } from 'react'
 
 import styles from '@/styles/Home.module.css'
-
 import Navigator from './components/Navigator'
+
+import schedules from '../data/schedule.json'
 
 export default function Home() {
   const [isLogin, setIsLogin] = useState(false)
@@ -108,21 +109,21 @@ export default function Home() {
                 <h1>아침</h1>
                 <p className={styles.blue}><b>오전 07시 40분</b></p>
                 <div className={styles.mealCard}>
-                  <p ref={breackfastText}>베이글 샌드위치, 차돌박이된장찌개, 떡갈비스틱, 양념깻잎지, 포기김치</p>
+                  <p ref={breackfastText}></p>
                 </div>
               </div>
               <div className={styles.mealDiv}>
                 <h1>점심</h1>
                 <p className={styles.blue}><b>오후 01시 00분</b></p>
                 <div className={styles.mealCard}>
-                  <p ref={lunchText}>베이글 샌드위치, 차돌박이된장찌개, 떡갈비스틱, 양념깻잎지, 포기김치</p>
+                  <p ref={lunchText}></p>
                 </div>
               </div>
               <div className={styles.mealDiv}>
                 <h1>저녁</h1>
                 <p className={styles.blue}><b>오후 06시 53분</b></p>
                 <div className={styles.mealCard}>
-                  <p ref={dinnerText}>베이글 샌드위치, 차돌박이된장찌개, 떡갈비스틱, 양념깻잎지, 포기김치</p>
+                  <p ref={dinnerText}></p>
                 </div>
               </div>
             </section>
@@ -130,24 +131,28 @@ export default function Home() {
               <div className={styles.sectionTitle}>
                 <h1>시간표</h1>
               </div>
-              <table>
+              <table className={styles.schedule}>
                 <thead>
                   <tr>
-                    <th>월</th>
-                    <th>화</th>
-                    <th>수</th>
-                    <th>목</th>
-                    <th>금</th>
+                    <th className={styles.schedule}>월</th>
+                    <th className={styles.schedule}>화</th>
+                    <th className={styles.schedule}>수</th>
+                    <th className={styles.schedule}>목</th>
+                    <th className={styles.schedule}>금</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>테스트</td>
-                    <td>테스트</td>
-                    <td>테스트</td>
-                    <td>테스트</td>
-                    <td>테스트</td>
-                  </tr>
+                  {
+                    schedules.map((schedule) => (
+                      <tr className={styles.schedule}>
+                        <td className={styles.schedule}>{schedule[0]}</td>
+                        <td className={styles.schedule}>{schedule[1]}</td>
+                        <td className={styles.schedule}>{schedule[2]}</td>
+                        <td className={styles.schedule}>{schedule[3]}</td>
+                        <td className={styles.schedule}>{schedule[4]}</td>
+                      </tr>
+                    ))
+                  }
                 </tbody>
               </table>
             </section>
