@@ -56,7 +56,8 @@ section.schedule {
 
 table.schedule {
   background-color: var(--bg-color);
-  border-radius: 30px;
+  border-radius: 10px;
+  border-style: hidden;
   padding: 15px;
   color: var(--txt-color);
   box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
@@ -71,6 +72,7 @@ th.schedule, td.schedule {
 
 th.schedule {
   text-align: left;
+  /* border-bottom: 1px solid var(--blue); */
 }
 
 section.content {
@@ -195,5 +197,9 @@ div.notice {
 
   section.meal, section.schedule {
     width: 100%;
+  }
+
+  th.schedule, td.schedule {
+    padding: 6px;
   }
 }
