@@ -1,9 +1,7 @@
 'use client'
 
-import Head from 'next/head'
-import { useRef, RefObject, useEffect, useState, MutableRefObject } from 'react'
+import { useRef, RefObject, useEffect, useState } from 'react'
 
-import '@/styles/globals.css'
 import styles from '@/styles/Home.module.css'
 import Navigator from './components/Navigator'
 
@@ -60,6 +58,7 @@ export default function Page() {
     const token = localStorage.getItem('token')
     const res = await fetch(`/api/point/get?token=${token}`)
     const data = await res.json()
+    console.log(data)
     if (res.status === 200) {
       pointText.current!.innerText = data.point
     }

@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Head from 'next/head'
 
 import Navigator from './components/Navigator';
+import '../styles/globals.css'
  
 export const metadata: Metadata = {
   title: 'Home',

@@ -1,12 +1,9 @@
 'use client'
 
-import Head from 'next/head'
 import { useRouter } from 'next/navigation'
 import { useRef } from 'react'
 
 import styles from '@/styles/Login.module.css'
-
-import Navigator from '../components/Navigator'
 
 export default function login() {
   const router = useRouter()
@@ -15,7 +12,7 @@ export default function login() {
   
   async function handleLogin() {
     const res = await fetch('/api/user/login', {
-      method: "POST",
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
