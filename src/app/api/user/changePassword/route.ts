@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import crypto from 'crypto'
 
-import client from '../../../lib/client'
+import client from '../../../../lib/client'
 
 type ResponseDataType = {
   StatusCode: number,

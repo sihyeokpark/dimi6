@@ -2,8 +2,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import base64url from 'base64url'
 
-import Jwt, { JwtStatusCode } from '../../../lib/jwt'
-import client from '../../../lib/client'
+import Jwt, { JwtStatusCode } from '../../../../lib/jwt'
+import client from '../../../../lib/client'
 
 type Data = {
   StatusCode: number,

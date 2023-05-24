@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import client from '../../../lib/client'
+import client from '../../../../lib/client'
 import { Item } from '@prisma/client'
 
 type Data = {
