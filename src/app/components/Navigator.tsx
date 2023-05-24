@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect, useRef } from 'react';
 
 import styles from '@/styles/Navigator.module.css'
