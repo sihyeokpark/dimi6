@@ -2,7 +2,9 @@
 const nextConfig = {
   reactStrictMode: false,
   experimental: {
-    appDir: false
+    appDir: true,
+    serverComponents: true,
+    outputStandalone: true,
   }
 }
 

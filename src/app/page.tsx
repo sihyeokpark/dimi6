@@ -1,66 +1,72 @@
+import { Metadata } from 'next'
 import Head from 'next/head'
-import { useRef, RefObject, useEffect, useState, MutableRefObject } from 'react'
+// import { useRef, RefObject, useEffect, useState, MutableRefObject } from 'react'
 
+import '@/styles/globals.css'
 import styles from '@/styles/Home.module.css'
 import Navigator from './components/Navigator'
 
 import schedules from '../data/schedule.json'
+ 
+export const metadata: Metadata = {
+  title: 'My Page Title',
+};
+ 
+export default function Page() {
+  // const [isLogin, setIsLogin] = useState(false)
+  // const loginAlertText = useRef<HTMLHeadingElement>(null)
+  // const pText = useRef<HTMLHeadingElement>(null)
+  // const pointText = useRef<HTMLHeadingElement>(null)
+  // const breackfastText = useRef<HTMLParagraphElement>(null)
+  // const lunchText = useRef<HTMLParagraphElement>(null)
+  // const dinnerText = useRef<HTMLParagraphElement>(null)
 
-export default function Home() {
-  const [isLogin, setIsLogin] = useState(false)
-  const loginAlertText = useRef<HTMLHeadingElement>(null)
-  const pText = useRef<HTMLHeadingElement>(null)
-  const pointText = useRef<HTMLHeadingElement>(null)
-  const breackfastText = useRef<HTMLParagraphElement>(null)
-  const lunchText = useRef<HTMLParagraphElement>(null)
-  const dinnerText = useRef<HTMLParagraphElement>(null)
 
+  // useEffect(() => {
+  //   verify()
+  //   getMeal()
+  // }, [])
 
-  useEffect(() => {
-    verify()
-    getMeal()
-  }, [])
+  // async function verify() {
+  //   const token = localStorage.getItem('token')
+  //   if (token === '') return false
+  //   const res = await fetch('/api/user/verify', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       token: token
+  //     })
+  //   })
+  //   if (res.status === 200) {
+  //     setIsLogin(true)
+  //     getPoint()
+  //   }
+  //   else {
+  //     loginAlertText.current!.innerText = '로그인이 필요합니다.'
+  //     pointText.current!.innerText = ''
+  //     pText.current!.innerText = ''
+  //     setIsLogin(false)
+  //     localStorage.removeItem('token')
+  //   }
+  // }
 
-  async function verify() {
-    const token = localStorage.getItem('token')
-    if (token === '') return false
-    const res = await fetch('/api/user/verify', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        token: token
-      })
-    })
-    if (res.status === 200) {
-      setIsLogin(true)
-      getPoint()
-    }
-    else {
-      loginAlertText.current!.innerText = '로그인이 필요합니다.'
-      pointText.current!.innerText = ''
-      pText.current!.innerText = ''
-      setIsLogin(false)
-      localStorage.removeItem('token')
-    }
-  }
+  // async function getMeal() {
+  //   const data = await (await fetch('https://xn--299a1v27nvthhjj.com/api/' + new Date().toISOString().split('T')[0])).json()
+  //   breackfastText.current!.innerText = data.meal.breakfast.replaceAll('2종시리얼/유산균/우유,저지방우유,두유,무설탕두유중택1/', '').replaceAll('/', ', ') // 맨날 똑같은거 제외
+  //   lunchText.current!.innerText = data.meal.lunch.replaceAll('/', ', ')
+  //   dinnerText.current!.innerText = data.meal.dinner.replaceAll('/', ', ')
+  // }
 
-  async function getMeal() {
-    const data = await (await fetch('https://xn--299a1v27nvthhjj.com/api/' + new Date().toISOString().split('T')[0])).json()
-    breackfastText.current!.innerText = data.meal.breakfast.replaceAll('2종시리얼/유산균/우유,저지방우유,두유,무설탕두유중택1/', '').replaceAll('/', ', ') // 맨날 똑같은거 제외
-    lunchText.current!.innerText = data.meal.lunch.replaceAll('/', ', ')
-    dinnerText.current!.innerText = data.meal.dinner.replaceAll('/', ', ')
-  }
-
-  async function getPoint() {
-    const token = localStorage.getItem('token')
-    const res = await fetch(`/api/point/get?token=${token}`)
-    const data = await res.json()
-    if (res.status === 200) {
-      pointText.current!.innerText = data.point
-    }
-  }
+  // async function getPoint() {
+  //   const token = localStorage.getItem('token')
+  //   const res = await fetch(`/api/point/get?token=${token}`)
+  //   const data = await res.json()
+  //   if (res.status === 200) {
+  //     pointText.current!.innerText = data.point
+  //   }
+  // }
 
   return (
     <>
@@ -71,7 +77,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet"></link>
       </Head>
-      <Navigator></Navigator>
+      {/* <Navigator></Navigator> */}
       <div className={styles.center}>
         <main className={styles.main}>
           <div className={styles.title}>
@@ -84,8 +90,8 @@ export default function Home() {
           <section className={styles.content}>
             <div className={styles.card}>
               <div className={styles.row}>
-                <h1 ref={loginAlertText} className={styles.point}>포인트</h1>
-                <h1 ref={pText} className={styles.moneyTitle}><span ref={pointText} className={styles.money}></span>p</h1>
+                {/* <h1 ref={loginAlertText} className={styles.point}>포인트</h1>
+                <h1 ref={pText} className={styles.moneyTitle}><span ref={pointText} className={styles.money}></span>p</h1> */}
               </div>
             </div>
             <div className={styles.card}>
@@ -109,21 +115,21 @@ export default function Home() {
                 <h1>아침</h1>
                 <p className={styles.blue}><b>오전 07시 40분</b></p>
                 <div className={styles.mealCard}>
-                  <p ref={breackfastText}></p>
+                  {/* <p ref={breackfastText}></p> */}
                 </div>
               </div>
               <div className={styles.mealDiv}>
                 <h1>점심</h1>
                 <p className={styles.blue}><b>오후 01시 00분</b></p>
                 <div className={styles.mealCard}>
-                  <p ref={lunchText}></p>
+                  {/* <p ref={lunchText}></p> */}
                 </div>
               </div>
               <div className={styles.mealDiv}>
                 <h1>저녁</h1>
                 <p className={styles.blue}><b>오후 06시 53분</b></p>
                 <div className={styles.mealCard}>
-                  <p ref={dinnerText}></p>
+                  {/* <p ref={dinnerText}></p> */}
                 </div>
               </div>
             </section>
@@ -162,3 +168,4 @@ export default function Home() {
     </>
   )
 }
+

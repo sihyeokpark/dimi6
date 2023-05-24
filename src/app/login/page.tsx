@@ -4,7 +4,7 @@ import { useRef } from 'react'
 
 import styles from '@/styles/Login.module.css'
 
-import Navigator from './components/Navigator'
+import Navigator from '../components/Navigator'
 
 export default function login() {
   const router = useRouter()

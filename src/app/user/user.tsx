@@ -5,7 +5,7 @@ import { useRef, useEffect, useState, RefObject } from 'react'
 
 import styles from '@/styles/admin.module.css'
 
-import Navigator from './components/Navigator'
+import Navigator from '../components/Navigator'
 
 export default function admin() {
   const router = useRouter()

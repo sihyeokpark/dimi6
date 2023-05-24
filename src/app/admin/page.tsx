@@ -4,10 +4,10 @@ import { useRef, useEffect, useState } from 'react'
 
 import styles from '@/styles/admin.module.css'
 
-import Navigator from './components/Navigator'
-import { members } from '../lib/classMembers'
-import adminMembers from '../data/admin.json'
-import rules from '../data/rule.json'
+import Navigator from '../components/Navigator'
+import { members } from '../../lib/classMembers'
+import adminMembers from '../../data/admin.json'
+import rules from '../../data/rule.json'
 
 export default function admin() {
   const router = useRouter()

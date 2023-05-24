@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 import styles from '@/styles/shop.module.css'
 
-import Navigator from './components/Navigator'
+import Navigator from '../components/Navigator'
 import { useEffect, useRef, useState } from 'react'
 import { Inventory, Item } from '@prisma/client'
 
