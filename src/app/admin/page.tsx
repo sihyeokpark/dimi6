@@ -1,12 +1,10 @@
 'use client'
 
-import Head from 'next/head'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useRef, useEffect, useState } from 'react'
 
 import styles from '@/styles/admin.module.css'
 
-import Navigator from '../components/Navigator'
 import { members } from '../../lib/classMembers'
 import adminMembers from '../../data/admin.json'
 import rules from '../../data/rule.json'
@@ -89,9 +87,12 @@ export default function admin() {
                   ))}
                 </select>
                 <select ref={name} className={styles.select}>
-                  {members.map((member, index) => (
-                    <option key={index+1} value={member}>{`${index+1} ${member}`}</option>
-                  ))}
+                  {members.map((member, index) => {
+                    if (member === '') return
+                    return (
+                      <option key={index+1} value={member}>{`${index+1} ${member}`}</option>
+                    )
+                  })}
                 </select>
                 <button onClick={send}>전송</button>
               </section>
