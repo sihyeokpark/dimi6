@@ -1,33 +1,16 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextResponse } from 'next/server'
 
 import client from '../../../../lib/client'
-import { Item } from '@prisma/client'
 
-type Data = {
-  item?: Item[], 
-  error?: string
-}
-
-interface iRequest extends NextApiRequest {
-  query: {
-    token: string
-  }
-}
-
-export default async function handler(
-  req: iRequest,
-  res: NextApiResponse<Data>
+export async function GET(
+  req: Request
 ) {
-  if (req.method === 'GET') {
-    const data = await client.item.findMany()
-    if (data.length !== 0) {
-      res.status(200).json({
-        item: data,
-      })
-    }
+  const data = await client.item.findMany()
+  if (data.length !== 0) {
+    return NextResponse.json({
+      item: data,
+    }, { status: 200 })
   } else {
-    res.status(405).json({
-      error: 'only POST'
-    })
+    return NextResponse.json({ message: 'No items found' }, { status: 404})
   }
 }

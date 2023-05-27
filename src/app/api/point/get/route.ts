@@ -4,14 +4,9 @@ import base64url from 'base64url'
 import Jwt, { JwtStatusCode } from '../../../../lib/jwt'
 import client from '../../../../lib/client'
 
-type Params = {
-  token: string
-}
-
-export async function GET(req: Request, context: { params: Params }) {
-  console.log(context)
-  const token = context.params.token
-  console.log(token)
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url)
+  const token = searchParams.get('token') as string
   const tokenData = JSON.parse(base64url.decode(token.split('.')[1]))
   const verifyResult = Jwt.verify(token)
   if (verifyResult == JwtStatusCode.TokenExpired) {
@@ -23,7 +18,7 @@ export async function GET(req: Request, context: { params: Params }) {
     where: { name: tokenData.name }
   })
   if (data.length != 0) {
-    NextResponse.json({
+    return NextResponse.json({
       point: data[0].point,
       message: 'Success'
     }, { status: 200 })

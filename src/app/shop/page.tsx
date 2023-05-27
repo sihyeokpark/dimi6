@@ -1,7 +1,5 @@
 'use client'
 
-import Head from 'next/head'
-
 import styles from '@/styles/shop.module.css'
 
 import Navigator from '../components/Navigator'
@@ -49,9 +47,10 @@ export default function shop() {
     await resetItems(itemsList.current)
 
     const res = await fetch('/api/item/get')
-    const data = await res.json()
+    console.log(res)
     if (res.status !== 200) return alert('아이템 목록을 가져올 수 없습니다.')
-
+    
+    const data = await res.json()
     const inventoryRes = await fetch('/api/item/inventory', {
       method: 'POST',
       headers: {
@@ -61,6 +60,7 @@ export default function shop() {
         token: localStorage.getItem('token')
       })
     })
+    if (inventoryRes.status !== 200) return alert('아이템 목록을 가져올 수 없습니다.')
     const inventoryData = await inventoryRes.json()
     console.log(inventoryData)
 
