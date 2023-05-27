@@ -57,9 +57,8 @@ export default function Page() {
   async function getPoint() {
     const token = localStorage.getItem('token')
     const res = await fetch(`/api/point/get?token=${token}`)
-    const data = await res.json()
-    console.log(data)
     if (res.status === 200) {
+      const data = await res.json()
       pointText.current!.innerText = data.point
     }
   }

@@ -7,8 +7,6 @@ import { useRef, useEffect, useState, RefObject } from 'react'
 
 import styles from '@/styles/admin.module.css'
 
-import Navigator from '../components/Navigator'
-
 export default function admin() {
   const router = useRouter()
   const [isLogin, setIsLogin] = useState(false)
@@ -54,7 +52,7 @@ export default function admin() {
     }
     const name = JSON.parse(base64url.decode(localStorage.getItem('token')!.split('.')[1])).name
     console.log(name)
-    const data = await (await fetch('/api/user/changePassword', {
+    const res = await fetch('/api/user/changePassword', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -64,8 +62,10 @@ export default function admin() {
         currentPassword: currentPassword.current?.value,
         newPassword: newPassword.current?.value
       })
-    })).json()
-    if (data.StatusCode == 200) {
+    })
+    console.log(res)
+    const data = await res.json()
+    if (res.status === 200) {
       alert('성공적으로 비밀번호를 변경했습니다.\n' + data.message)
     } else {
       alert('오류가 발생했습니다.\n' + data.error)
