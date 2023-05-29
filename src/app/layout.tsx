@@ -6,8 +6,8 @@ import Navigator from './components/Navigator';
 import '../styles/globals.css'
  
 export const metadata: Metadata = {
-  title: 'Home',
-  description: 'Welcome to Next.js',
+  title: 'Dimi6',
+  description: '한국디지털미디어고등학교 1학년 6반 포인트 시스템',
 }
 
 const SUIT = localFont({

@@ -1,14 +1,16 @@
 'use client'
 
-import styles from '@/styles/shop.module.css'
-
-import Navigator from '../components/Navigator'
 import { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Inventory, Item } from '@prisma/client'
+
+import styles from '@/styles/shop.module.css'
 
 export default function shop() {
   const itemsList = useRef<HTMLDivElement>(null)
   const [itemArray, setItemArray] = useState<JSX.Element[]>([])
+
+  const router = useRouter()
 
   useEffect(() => {
     getItems()
@@ -48,7 +50,10 @@ export default function shop() {
 
     const res = await fetch('/api/item/get')
     console.log(res)
-    if (res.status !== 200) return alert('아이템 목록을 가져올 수 없습니다.')
+    if (res.status !== 200) {
+      alert('아이템 목록을 가져올 수 없습니다.')
+      return router.push('/')
+    }
     
     const data = await res.json()
     const inventoryRes = await fetch('/api/item/inventory', {
@@ -60,7 +65,10 @@ export default function shop() {
         token: localStorage.getItem('token')
       })
     })
-    if (inventoryRes.status !== 200) return alert('아이템 목록을 가져올 수 없습니다.')
+    if (inventoryRes.status !== 200) {
+      alert('아이템 목록을 가져올 수 없습니다.')
+      return router.push('/')
+    }
     const inventoryData = await inventoryRes.json()
     console.log(inventoryData)
 

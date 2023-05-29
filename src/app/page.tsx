@@ -1,9 +1,8 @@
 'use client'
 
-import { useRef, RefObject, useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 
 import styles from '@/styles/Home.module.css'
-import Navigator from './components/Navigator'
 
 import schedules from '../data/schedule.json'
 

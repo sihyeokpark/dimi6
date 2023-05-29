@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 import styles from '@/styles/Navigator.module.css'
 import adminMembers from '../../data/admin.json'
@@ -15,6 +15,10 @@ export default function Navigator() {
   useEffect(() => {
     verify()
   }, [])
+
+  function rerender() {
+    setIsLogin(isLogin)
+  }
 
   async function verify() {
     const token = localStorage.getItem('token')
@@ -58,10 +62,10 @@ export default function Navigator() {
         {/* <a className={styles.logo}>Dimi6</a> */}
       </div>
       <div className={styles.right}>
-        { isAdmin && <Link href='/admin'>Admin</Link> }
-        <Link href="/shop">Shop</Link>
-        { isLogin && <a href="/" onClick={() => localStorage.removeItem('token')}>Logout</a> }
-        { !isLogin && <Link href="/login">Login</Link> }
+        { isAdmin && <Link href='/admin'>관리자</Link> }
+        <Link href="/shop">교환소</Link>
+        { isLogin && <a href="/" onClick={() => localStorage.removeItem('token')}>로그아웃</a> }
+        { !isLogin && <Link href="/login">로그인</Link> }
         <Link href='/user'><img src="img/user.png" className={styles.profile}></img></Link>
         {/* <div ref={userModal} className={styles.user}>
           <h2>1610 박시혁</h2>
