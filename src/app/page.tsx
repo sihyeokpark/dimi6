@@ -6,7 +6,7 @@ import styles from '@/styles/Home.module.css'
 import Navigator from './components/Navigator'
 
 import schedules from '../data/schedule.json'
- 
+
 export default function Page() {
   const [isLogin, setIsLogin] = useState(false)
   const loginAlertText = useRef<HTMLHeadingElement>(null)
