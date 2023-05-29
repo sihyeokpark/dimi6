@@ -13,39 +13,39 @@ export const metadata: Metadata = {
 const SUIT = localFont({
   src: [
     {
-      path: './font/SUIT-Thin.ttf',
+      path: '../font/SUIT-Thin.ttf',
       weight: '100',
     },
     {
-      path: './font/SUIT-ExtraLight.ttf',
+      path: '../font/SUIT-ExtraLight.ttf',
       weight: '200',
     },
     {
-      path: './font/SUIT-Light.ttf',
+      path: '../font/SUIT-Light.ttf',
       weight: '300',
     },
     {
-      path: './font/SUIT-Regular.ttf',
+      path: '../font/SUIT-Regular.ttf',
       weight: '400',
     },
     {
-      path: './font/SUIT-Medium.ttf',
+      path: '../font/SUIT-Medium.ttf',
       weight: '500',
     },
     {
-      path: './font/SUIT-SemiBold.ttf',
+      path: '../font/SUIT-SemiBold.ttf',
       weight: '600',
     },
     {
-      path: './font/SUIT-Bold.ttf',
+      path: '../font/SUIT-Bold.ttf',
       weight: '700',
     },
     {
-      path: './font/SUIT-ExtraBold.ttf',
+      path: '../font/SUIT-ExtraBold.ttf',
       weight: '800',
     },
     {
-      path: './font/SUIT-Heavy.ttf',
+      path: '../font/SUIT-Heavy.ttf',
       weight: '900',
     },
   ]
