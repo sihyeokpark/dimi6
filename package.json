@@ -12,8 +12,8 @@
   "dependencies": {
     "@next/font": "^13.4.4",
     "@prisma/client": "^4.12.0",
-    "@types/node": "18.15.11",
-    "@types/react": "18.0.33",
+    "@types/node": "20.2.5",
+    "@types/react": "18.2.7",
     "@types/react-dom": "18.0.11",
     "base64url": "^3.0.1",
     "cross-env": "^7.0.3",
@@ -21,7 +21,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sqlite3": "^5.1.6",
-    "typescript": "5.0.3"
+    "typescript": "5.0.4"
   },
   "devDependencies": {
     "prisma": "^4.14.0"

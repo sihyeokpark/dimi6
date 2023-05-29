@@ -28,26 +28,26 @@ const SUIT = localFont({
       path: './font/SUIT-Regular.ttf',
       weight: '400',
     },
-    // {
-    //   path: './font/SUIT-Medium.tff',
-    //   weight: '500',
-    // },
-    // {
-    //   path: './font/SUIT-SemiBold.tff',
-    //   weight: '600',
-    // },
-    // {
-    //   path: './font/SUIT-Bold.tff',
-    //   weight: '700',
-    // },
-    // {
-    //   path: './font/SUIT-ExtraBold.tff',
-    //   weight: '800',
-    // },
-    // {
-    //   path: './font/SUIT-Heavy.tff',
-    //   weight: '900',
-    // },
+    {
+      path: './font/SUIT-Medium.ttf',
+      weight: '500',
+    },
+    {
+      path: './font/SUIT-SemiBold.ttf',
+      weight: '600',
+    },
+    {
+      path: './font/SUIT-Bold.ttf',
+      weight: '700',
+    },
+    {
+      path: './font/SUIT-ExtraBold.ttf',
+      weight: '800',
+    },
+    {
+      path: './font/SUIT-Heavy.ttf',
+      weight: '900',
+    },
   ]
 })
 
