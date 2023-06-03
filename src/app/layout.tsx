@@ -2,6 +2,7 @@ import localFont from '@next/font/local';
 import { Metadata } from 'next'
 import Head from 'next/head'
 
+import RecoilRootWrapper from './RecoilRootWrapper';
 import Navigator from './components/Navigator';
 import '../styles/globals.css'
  
@@ -68,8 +69,10 @@ export default function RootLayout({
         <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet"></link>
       </Head>
       <body>
-        <Navigator></Navigator>
-        {children}
+        <RecoilRootWrapper>      
+          <Navigator></Navigator>
+          {children}
+        </RecoilRootWrapper>
       </body>
     </html>
   );

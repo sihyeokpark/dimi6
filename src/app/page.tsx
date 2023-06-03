@@ -1,10 +1,12 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react'
+import { RecoilRoot, useRecoilState } from 'recoil'
 
 import styles from '@/styles/Home.module.css'
 
-import schedules from '../data/schedule.json'
+import { navRerenderState } from '@/lib/recoil'
+import schedules from '@/data/schedule.json'
 
 export default function Page() {
   const [isLogin, setIsLogin] = useState(false)
@@ -15,6 +17,7 @@ export default function Page() {
   const lunchText = useRef<HTMLParagraphElement>(null)
   const dinnerText = useRef<HTMLParagraphElement>(null)
 
+  const [navRerender, setNavRerender] = useRecoilState(navRerenderState)
 
   useEffect(() => {
     verify()

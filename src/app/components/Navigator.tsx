@@ -1,10 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
+import { useRecoilState } from 'recoil'
+import Link from 'next/link'
 
 import styles from '@/styles/Navigator.module.css'
 import adminMembers from '../../data/admin.json'
-import Link from 'next/link'
+import { navRerenderState } from '@/lib/recoil'
 
 export default function Navigator() {
   const [isLogin, setIsLogin] = useState(false)
@@ -12,13 +14,11 @@ export default function Navigator() {
   // const userModal = useRef<HTMLDivElement>(null)
   // const pointText = useRef<HTMLParagraphElement>(null)
 
+  const [navRerender, setNavRerender] = useRecoilState(navRerenderState)
+
   useEffect(() => {
     verify()
   }, [])
-
-  function rerender() {
-    setIsLogin(isLogin)
-  }
 
   async function verify() {
     const token = localStorage.getItem('token')
