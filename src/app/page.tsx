@@ -12,6 +12,7 @@ export default function Page() {
   const loginAlertText = useRef<HTMLHeadingElement>(null)
   const pText = useRef<HTMLHeadingElement>(null)
   const pointText = useRef<HTMLHeadingElement>(null)
+  const noticeText = useRef<HTMLParagraphElement>(null)
   const breackfastText = useRef<HTMLParagraphElement>(null)
   const lunchText = useRef<HTMLParagraphElement>(null)
   const dinnerText = useRef<HTMLParagraphElement>(null)
@@ -38,6 +39,8 @@ export default function Page() {
     })
     if (res.status === 200) {
       setIsLogin(true)
+      const data = await res.json()
+      noticeText.current!.innerText = `${data.name}님, 환영합니다.`
       getPoint()
     }
     else {
@@ -81,7 +84,7 @@ export default function Page() {
             <h1>1학년 6반 포인트 시스템</h1>
           </div>
           <div className={styles.notice}>
-          <img src='img/megaphone.png' height={30}></img><p>사이트를 제작 중입니다.</p>
+          <img src='img/megaphone.png' height={30}></img><p ref={noticeText}>로그인을 해주세요.</p>
           </div>
           <section className={styles.content}>
             <div className={styles.card}>
