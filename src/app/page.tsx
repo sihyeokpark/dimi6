@@ -51,9 +51,16 @@ export default function Page() {
 
   async function getMeal() {
     const data = await (await fetch('https://xn--299a1v27nvthhjj.com/api/' + new Date().toISOString().split('T')[0])).json()
-    breackfastText.current!.innerText = data.meal.breakfast.replaceAll('2종시리얼/유산균/우유,저지방우유,두유,무설탕두유중택1/', '').replaceAll('/', ', ') // 맨날 똑같은거 제외
-    lunchText.current!.innerText = data.meal.lunch.replaceAll('/', ', ')
-    dinnerText.current!.innerText = data.meal.dinner.replaceAll('/', ', ')
+    if (data.status === 'error') {
+      breackfastText.current!.innerText = '급식이 존재하지 않습니다.'
+      lunchText.current!.innerText = '급식이 존재하지 않습니다.'
+      dinnerText.current!.innerText = '급식이 존재하지 않습니다.'
+    } else {
+      breackfastText.current!.innerText = (data.meal.breakfast ?? '급식이 존재하지 않습니다.').replaceAll('2종시리얼/유산균/우유,저지방우유,두유,무설탕두유중택1/', '').replaceAll('/', ', ') // 맨날 똑같은거 제외
+      lunchText.current!.innerText = (data.meal.lunch ?? '급식이 존재하지 않습니다.').replaceAll('/', ', ')
+      dinnerText.current!.innerText = (data.meal.dinner ?? '급식이 존재하지 않습니다.').replaceAll('/', ', ')
+    }
+    
   }
 
   async function getPoint() {

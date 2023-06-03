@@ -30,9 +30,7 @@ export default function login() {
     const data = await res.json()
     if (res.status == 200) {
       localStorage.setItem('token', data.token)
-      console.log(localStorage.getItem('token'))
       setIsLogin(true)
-      console.log(adminMembers.indexOf(name.current?.value as string))
       if (adminMembers.indexOf(name.current?.value as string) !== -1) setIsAdmin(true)
       router.push('/')
     } else {
