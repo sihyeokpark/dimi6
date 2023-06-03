@@ -145,8 +145,8 @@ export default function Page() {
                 </thead>
                 <tbody>
                   {
-                    schedules.map((schedule) => (
-                      <tr className={styles.schedule}>
+                    schedules.map((schedule, i) => (
+                      <tr key={i} className={styles.schedule}>
                         <td className={styles.schedule}>{schedule[0]}</td>
                         <td className={styles.schedule}>{schedule[1]}</td>
                         <td className={styles.schedule}>{schedule[2]}</td>
