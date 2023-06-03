@@ -9,7 +9,7 @@ export async function POST(req: Request) {
   const crytoPassword = crypto.createHash('sha256').update(body.password).digest('hex')
   // 프론트 단에서 #이 들어가면 그 이후에 구문이 무시됨.
   if (!body || !body.name || !body.password) {
-    return NextResponse.json({ message: 'login failed', error: '# is banned' }, { status: 401 })
+    return NextResponse.json({ message: 'login failed', error: 'please write name and password' }, { status: 401 })
   }
   const data = await client.user.findMany({
     where: {
@@ -23,5 +23,7 @@ export async function POST(req: Request) {
       message: `user ${data[0].name} login successfully`,
       token: jwt.getJwt(),
     }, { status: 200 })
+  } else {
+    return NextResponse.json({ message: 'login failed', error: 'please write name and password' }, { status: 401 })
   }
 }
