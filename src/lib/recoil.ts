@@ -1,8 +1,14 @@
 import { atom } from 'recoil'
 
-const navRerenderState = atom({
-  key: 'navRerenderState',
-  default: '',
-});
+const isLoginState = atom({
+  key: 'isLoginState',
+  default: false,
+})
 
-export { navRerenderState }
+const isAdminState = atom({
+  key: 'isAdminState',
+  default: false,
+})
+
+
+export { isLoginState, isAdminState }

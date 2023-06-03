@@ -38,7 +38,7 @@ export default function admin() {
       })
     })
     const data = await res.json()
-    if (res.status === 200 && adminMembers.indexOf(data.name) !== -1) setIsAdmin(true)
+    if (isAdmin || (res.status === 200 && adminMembers.indexOf(data.name) !== -1)) setIsAdmin(true)
     else {
       alert('관리자만 접근 가능합니다.')
       router.push('/')

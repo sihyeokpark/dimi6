@@ -1,18 +1,20 @@
 'use client'
 
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { useRouter } from 'next/navigation'
 import { useRef } from 'react'
 
 import styles from '@/styles/Login.module.css'
-import { navRerenderState } from '@/lib/recoil'
+import { isLoginState, isAdminState } from '@/lib/recoil'
+import adminMembers from '@/data/admin.json'
 
 export default function login() {
   const router = useRouter()
   const name = useRef<HTMLInputElement>(null)
   const password = useRef<HTMLInputElement>(null)
 
-  const [navRerender, setNavRerender] = useRecoilState(navRerenderState)
+  const setIsLogin = useSetRecoilState(isLoginState)
+  const setIsAdmin = useSetRecoilState(isAdminState)
   
   async function handleLogin() {
     const res = await fetch('/api/user/login', {
@@ -26,11 +28,12 @@ export default function login() {
       })
     })
     const data = await res.json()
-    console.log(data)
     if (res.status == 200) {
       localStorage.setItem('token', data.token)
       console.log(localStorage.getItem('token'))
-      setNavRerender(navRerender)
+      setIsLogin(true)
+      console.log(adminMembers.indexOf(name.current?.value as string))
+      if (adminMembers.indexOf(name.current?.value as string) !== -1) setIsAdmin(true)
       router.push('/')
     } else {
       alert(`로그인에 실패했습니다.\nError ${data.error}`)

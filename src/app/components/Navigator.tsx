@@ -6,15 +6,11 @@ import Link from 'next/link'
 
 import styles from '@/styles/Navigator.module.css'
 import adminMembers from '../../data/admin.json'
-import { navRerenderState } from '@/lib/recoil'
+import { isLoginState, isAdminState } from '@/lib/recoil'
 
 export default function Navigator() {
-  const [isLogin, setIsLogin] = useState(false)
-  const [isAdmin, setIsAdmin] = useState(false)
-  // const userModal = useRef<HTMLDivElement>(null)
-  // const pointText = useRef<HTMLParagraphElement>(null)
-
-  const [navRerender, setNavRerender] = useRecoilState(navRerenderState)
+  const [isAdmin, setIsAdmin] = useRecoilState(isAdminState)
+  const [isLogin, setIsLogin] = useRecoilState(isLoginState)
 
   useEffect(() => {
     verify()
@@ -64,7 +60,10 @@ export default function Navigator() {
       <div className={styles.right}>
         { isAdmin && <Link href='/admin'>관리자</Link> }
         <Link href="/shop">교환소</Link>
-        { isLogin && <a href="/" onClick={() => localStorage.removeItem('token')}>로그아웃</a> }
+        { isLogin && <a href="/" onClick={() => {
+          localStorage.removeItem('token')
+          setIsLogin(false)
+        }}>로그아웃</a> }
         { !isLogin && <Link href="/login">로그인</Link> }
         <Link href='/user'><img src="img/user.png" className={styles.profile}></img></Link>
         {/* <div ref={userModal} className={styles.user}>
