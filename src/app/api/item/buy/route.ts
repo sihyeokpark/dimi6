@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
 import base64url from 'base64url'
 
-import client from '../../../../lib/client'
-import Jwt, { JwtStatusCode } from '../../../../lib/jwt'
+import client from '@/lib/client'
+import Jwt, { JwtStatusCode } from '@/lib/jwt'
 
 export async function POST(
   req: Request,

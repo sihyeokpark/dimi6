@@ -3,8 +3,8 @@ import { Metadata } from 'next'
 import Head from 'next/head'
 
 import RecoilRootWrapper from './RecoilRootWrapper';
-import Navigator from './components/Navigator';
-import '../styles/globals.css'
+import Navigator from '@/components/Navigator';
+import '@/styles/globals.css'
  
 export const metadata: Metadata = {
   title: 'Dimi6',

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import crypto from 'crypto'
 
-import client from '../../../../lib/client'
+import client from '@/lib/client'
 
 export async function POST(req: Request) {
   const body = await req.json()

@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil'
 import Link from 'next/link'
 
 import styles from '@/styles/Navigator.module.css'
-import adminMembers from '../../data/admin.json'
+import adminMembers from '../data/admin.json'
 import { isLoginState, isAdminState } from '@/lib/recoil'
 
 export default function Navigator() {

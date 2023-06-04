@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
 import crypto from 'crypto'
 
-import client from '../../../../lib/client'
-import Jwt from '../../../../lib/jwt'
+import client from '@/lib/client'
+import Jwt from '@/lib/jwt'
 
 export async function POST(req: Request) {
   const body = await req.json()

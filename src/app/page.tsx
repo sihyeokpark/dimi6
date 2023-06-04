@@ -1,7 +1,7 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
-import { RecoilRoot, useRecoilState, useSetRecoilState } from 'recoil'
+import { useRef, useEffect } from 'react'
+import { useSetRecoilState } from 'recoil'
 
 import styles from '@/styles/Home.module.css'
 

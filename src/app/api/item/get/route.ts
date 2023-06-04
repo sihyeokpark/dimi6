@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-import client from '../../../../lib/client'
+import client from '@/lib/client'
 
 export async function GET(
   req: Request
