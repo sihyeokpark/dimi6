@@ -77,26 +77,44 @@ export default function admin() {
         <main className={styles.main}>
           <h1>관리자 페이지</h1>
           {isAdmin && (
-            <div>
-              <section className={styles.section}>
-                <h2>포인트 전송</h2>
-                <input ref={money} type='number' placeholder='1000'></input>
-                <select ref={ruleSelect} onChange={changePoint} className={styles.select}>
-                  {rules.map((rule, index) => (
-                    <option key={index+1} value={rule.name + ' ' + rule.point.toString()}>{`${rule.name} [${rule.point.toString()}]`}</option>
-                  ))}
-                </select>
-                <select ref={name} className={styles.select}>
-                  {members.map((member, index) => {
-                    if (member === '') return
-                    return (
-                      <option key={index+1} value={member}>{`${index+1} ${member}`}</option>
-                    )
-                  })}
-                </select>
-                <button onClick={send}>전송</button>
-              </section>
-            </div>
+            <>
+              <div>
+                <section className={styles.section}>
+                  <h2>포인트 전송</h2>
+                  <input ref={money} type='number' placeholder='1000'></input>
+                  <select ref={ruleSelect} onChange={changePoint} className={styles.select}>
+                    {rules.map((rule, index) => (
+                      <option key={index+1} value={rule.name + ' ' + rule.point.toString()}>{`${rule.name} [${rule.point.toString()}]`}</option>
+                    ))}
+                  </select>
+                  <select ref={name} className={styles.select}>
+                    {members.map((member, index) => {
+                      if (member === '') return
+                      return (
+                        <option key={index+1} value={member}>{`${index+1} ${member}`}</option>
+                      )
+                    })}
+                  </select>
+                  <button onClick={send}>전송</button>
+                </section>
+              </div>
+              <table className={styles.schedule}>
+                <thead>
+                  <tr>
+                    <th className={styles.schedule}>번호</th>
+                    <th className={styles.schedule}>이름</th>
+                    <th className={styles.schedule}>포인트</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr key={1} className={styles.schedule}>
+                      <td className={styles.schedule}>test</td>
+                      <td className={styles.schedule}>test</td>
+                      <td className={styles.schedule}>test</td>
+                    </tr>
+                </tbody>
+              </table>
+            </>
           )}
         </main>
       </div>
