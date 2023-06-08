@@ -1,0 +1,45 @@
+.main {
+  max-width: 1080px;
+  text-align: center;
+  margin-top: 40px;
+  padding: 5px 8px;
+}
+
+div.center {
+  margin: 0 auto;
+  max-width: 1080px;
+  text-align: left;
+  padding-bottom: 100px;
+}
+
+table.noticeTable {
+  margin-top: 30px;
+  width: 100%;
+  border-radius: 15px;
+}
+
+table.noticeTable th, table.noticeTable td {
+  text-align: center;
+  width: 15px;
+  padding-bottom: 10px;
+}
+
+table.noticeTable tbody tr {
+  cursor: pointer;
+}
+
+table.noticeTable tr td:nth-child(1) {
+  width: 10%;
+}
+
+table.noticeTable tr td:nth-child(2) {
+  width: 60%;
+}
+
+table.noticeTable tr td:nth-child(3) {
+  width: 15%;
+}
+
+table.noticeTable tr td:nth-child(4) {
+  width: 15%;
+}

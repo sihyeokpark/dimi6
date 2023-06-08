@@ -1,0 +1,24 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 1080px;
+  text-align: center;
+  margin-top: 40px;
+  padding: 5px 8px;
+}
+
+div.center {
+  margin: 0 auto;
+  max-width: 1080px;
+  text-align: left;
+  padding-bottom: 100px;
+}
+
+p.date {
+
+}
+
+p.content {
+  font-size: large;
+}

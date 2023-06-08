@@ -35,7 +35,7 @@
     "**/*.tsx",
     "declaration.d.ts",
     ".next/types/**/*.ts"
-  ],
+, "src/app/api/post/getOne"  ],
   "exclude": [
     "node_modules"
   ]

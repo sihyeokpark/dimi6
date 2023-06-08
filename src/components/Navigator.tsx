@@ -54,18 +54,19 @@ export default function Navigator() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.left}>
-        <Link href="/"><img src='img/logo.png' className={styles.logo}></img></Link>
+        <Link href="/"><img src='/img/logo.png' className={styles.logo}></img></Link>
         {/* <a className={styles.logo}>Dimi6</a> */}
       </div>
       <div className={styles.right}>
         { isAdmin && <Link href='/admin'>관리자</Link> }
-        <Link href="/shop">교환소</Link>
+        { isLogin && <Link href="/notice">게시판</Link> }
+        { isLogin && <Link href="/shop">교환소</Link> }
         { isLogin && <a href="/" onClick={() => {
           localStorage.removeItem('token')
           setIsLogin(false)
         }}>로그아웃</a> }
         { !isLogin && <Link href="/login">로그인</Link> }
-        <Link href='/user'><img src="img/user.png" className={styles.profile}></img></Link>
+        <Link href='/user'><img src="/img/user.png" className={styles.profile}></img></Link>
         {/* <div ref={userModal} className={styles.user}>
           <h2>1610 박시혁</h2>
           <div className={styles.flex}>

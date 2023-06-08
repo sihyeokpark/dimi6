@@ -31,3 +31,11 @@ model Inventory {
   itemId      Int         @default(0)
   itemCount   Int         @default(0)
 }
+
+model Post {
+  id          Int         @id @default(0)
+  title       String      @default("")
+  writer      String      @default("")
+  date        DateTime    @default(now())
+  content     String      @db.VarChar(5000)
+}
