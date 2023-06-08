@@ -48,6 +48,19 @@ button {
   cursor: pointer;
 }
 
+textarea {
+  resize: none;
+  font-family: inherit;
+  background: rgba(57,74,156,.1);
+  border: none;
+  border-radius: 15px;
+  color: #0c1250;
+  font-size: 16px;
+  font-weight: 500;
+  outline: none;
+  padding: 14px 24px;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

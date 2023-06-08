@@ -1,4 +1,8 @@
 .main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   max-width: 1080px;
   text-align: center;
   margin-top: 40px;
@@ -13,9 +17,11 @@ div.center {
 }
 
 table.noticeTable {
-  margin-top: 30px;
   width: 100%;
   border-radius: 15px;
+}
+
+main.main button {
 }
 
 table.noticeTable th, table.noticeTable td {
@@ -42,4 +48,31 @@ table.noticeTable tr td:nth-child(3) {
 
 table.noticeTable tr td:nth-child(4) {
   width: 15%;
+}
+
+div.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+div.top button {
+  font-size: medium;
+}
+
+input.input {
+  width: 60%;
+  padding: 12px 20px;
+  margin: 8px 0;
+}
+
+section.section textarea {
+  margin: 10px;
+  width: 60%;
+  height: 200px;
+}
+
+section.section {
+  width: 100%;
 }

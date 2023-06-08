@@ -33,7 +33,7 @@ model Inventory {
 }
 
 model Post {
-  id          Int         @id @default(0)
+  id          Int         @default(autoincrement()) @id
   title       String      @default("")
   writer      String      @default("")
   date        DateTime    @default(now())

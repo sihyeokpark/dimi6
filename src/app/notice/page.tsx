@@ -20,7 +20,7 @@ export default function shop() {
     const data = await res.json()
     
     if (res.status === 200) {
-      setPostList(data)
+      setPostList(data.reverse())
     }
   }
 
@@ -30,6 +30,12 @@ export default function shop() {
       <div className={styles.center}>
         <main className={styles.main}>
           <h1>게시판</h1>
+
+          <div className={styles.top}>
+            <button onClick={() => {
+              router.push('/notice/write')
+            }}>글쓰기</button>
+          </div>
           
           <table className={styles.noticeTable}>
             <thead>

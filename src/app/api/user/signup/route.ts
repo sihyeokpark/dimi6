@@ -7,7 +7,8 @@ export async function POST(
   await client.user.create({
     data: {
       ...(await req.json()),
-      point: 0
+      point: 0,
+      
     },
   })
   NextResponse.json({ message: `user ${(await req.json()).name} created successfully` }, { status: 200})
