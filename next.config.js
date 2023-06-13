@@ -1,13 +1,13 @@
 /** @type {import('next').NextConfig} */
 const ContentSecurityPolicy = `
-  default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app www.googletagmanager.com;
-  style-src 'self' 'unsafe-inline';
-  img-src * blob: data:;
-  media-src 'none';
-  connect-src *;
-  font-src 'self';
-  frame-src giscus.app
+default-src 'self';
+script-src 'self' ;
+style-src 'self';
+img-src * blob: data:;
+media-src 'none';
+connect-src *;
+font-src 'self';
+object-src 'none';
 `
 
 const securityHeaders = [
