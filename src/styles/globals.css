@@ -100,8 +100,8 @@ th, td {
   padding: 15px;
 }
 
-th {
-  text-align: left;
+th, tr {
+  text-align: center;
   /* border-bottom: 1px solid var(--blue); */
 }
 

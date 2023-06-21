@@ -31,8 +31,8 @@ const nextConfig = {
   reactStrictMode: false,
   experimental: {
     appDir: true,
-  }
+  },
+  headers: headers
 }
 
 module.exports = nextConfig
-module.exports = headers
