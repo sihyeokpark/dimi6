@@ -31,7 +31,7 @@ export default function shop(context: { params: { slug: string } }) {
       <div className={styles.center}>
         <main className={styles.main}>
           <h1>{post?.title}</h1>
-          <p className={styles.date}>{(post?.date.toString() as string).split('T')[0].replaceAll('-', '.')}</p>
+          <p className={styles.date}>{post?.writer} - {(post?.date.toString() as string).split('T')[0].replaceAll('-', '.')}</p>
           <p className={styles.content}>{post?.content}</p>
         </main>
       </div>
