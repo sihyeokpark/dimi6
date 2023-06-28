@@ -16,7 +16,7 @@ export default function shop() {
   }, [])
 
   async function getPost() {
-    const res = await fetch('/api/post/get')
+    const res = await fetch('/api/post/get?token=' + localStorage.getItem('token'))
     const data = await res.json()
     
     if (res.status === 200) {
