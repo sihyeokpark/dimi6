@@ -22,7 +22,7 @@ export async function POST(
   if (!item.price || (!user?.point && (user?.point !== 0))) return NextResponse.json({ error: 'unknown user or item' }, { status: 401})
   if (user.point < item.price) return NextResponse.json({ error: 'not enough point', message: 'not enough point' }, { status: 403 })
 
-  await client.user.update({ where: { name: tokenData.name }, data: { point: user.point - item.price } })
+  if (user.point >= item.price) await client.user.update({ where: { name: tokenData.name }, data: { point: user.point - item.price } }) // prevent Race-condition
 
   const itemInInventory = await client.inventory.findFirst({ where: { id: user.id, itemId: item.id } })
   if (itemInInventory) await client.inventory.updateMany({ where: { id: user.id, itemId: item.id }, data: { itemCount: itemInInventory.itemCount + 1 } })
