@@ -39,3 +39,10 @@ model Post {
   date        DateTime    @default(now())
   content     String      @db.VarChar(5000)
 }
+
+model UsedItem {
+  id          Int         @default(autoincrement()) @id
+  itemId      Int         @default(0)
+  user        String      @default("")
+  date        DateTime    @default(now())
+}

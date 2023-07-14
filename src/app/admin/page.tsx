@@ -12,6 +12,7 @@ import rules from '@/data/rule.json'
 export default function admin() {
   const router = useRouter()
   const [isAdmin, setIsAdmin] = useState(false)
+  const [usedUsers, setUsedUsers] = useState<any>([])
 
   const name = useRef<HTMLSelectElement>(null)
   const money = useRef<HTMLInputElement>(null)
@@ -38,7 +39,10 @@ export default function admin() {
       })
     })
     const data = await res.json()
-    if (isAdmin || (res.status === 200 && adminMembers.indexOf(data.name) !== -1)) setIsAdmin(true)
+    if (isAdmin || (res.status === 200 && adminMembers.indexOf(data.name) !== -1)) {
+      setIsAdmin(true)
+      setUsedUsers(await getFridayStudent())
+    }
     else {
       alert('관리자만 접근 가능합니다.')
       router.push('/')
@@ -71,14 +75,27 @@ export default function admin() {
     money.current!.value = '-'+e.target.value.split('-')[1]
   }
 
+  async function getFridayStudent() {
+    const res = await fetch('/api/item/used?itemId=0', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const data = await res.json()
+    if (res.status !== 200) {
+      alert('오류가 발생했습니다.\n' + data.error)
+    }
+    return data
+  }
+
   return (
     <>
       <div className={styles.center}>
         <main className={styles.main}>
-          <h1>관리자 페이지</h1>
           {isAdmin && (
             <>
-              <div>
+              <div className={styles.row}>
                 <section className={styles.section}>
                   <h2>포인트 전송</h2>
                   <input ref={money} type='number' placeholder='1000'></input>
@@ -97,23 +114,34 @@ export default function admin() {
                   </select>
                   <button onClick={send}>전송</button>
                 </section>
+                <div className={styles.fridaySection}>
+                  <h2>금요귀가권 신청자 목록</h2>
+                  <table className={styles.friday}>
+                    <thead>
+                      <tr>
+                        <th className={styles.friday}>번호</th>
+                        <th className={styles.friday}>이름</th>
+                        <th className={styles.friday}>신청 시간</th>
+                        <th className={styles.friday}>상태</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {
+                          usedUsers.map((user: any, index: number) => {
+                            return (
+                              <tr key={1} className={styles.friday}>
+                                <td className={styles.friday}>{user.id}</td>
+                                <td className={styles.friday}>{user.user}</td>
+                                <td className={styles.friday}>{user.date.toString().replace('T', ' (').split('.')[0]+')'}</td>
+                                <td className={styles.fridayButton}><button>허용</button><button>거절</button></td>
+                              </tr>
+                            )
+                          })
+                        }
+                    </tbody>
+                  </table>
+                </div>
               </div>
-              <table className={styles.schedule}>
-                <thead>
-                  <tr>
-                    <th className={styles.schedule}>번호</th>
-                    <th className={styles.schedule}>이름</th>
-                    <th className={styles.schedule}>포인트</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <tr key={1} className={styles.schedule}>
-                      <td className={styles.schedule}>test</td>
-                      <td className={styles.schedule}>test</td>
-                      <td className={styles.schedule}>test</td>
-                    </tr>
-                </tbody>
-              </table>
             </>
           )}
         </main>

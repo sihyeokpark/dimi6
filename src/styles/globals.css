@@ -98,6 +98,7 @@ table {
 th, td {
   width: 15px;
   padding: 15px;
+  text-align: center;
 }
 
 th, tr {

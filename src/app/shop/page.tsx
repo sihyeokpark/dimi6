@@ -39,9 +39,31 @@ export default function shop() {
     getItems()
   }
 
+  async function useItem(e: React.MouseEvent<HTMLElement>) {
+    const itemId = e.currentTarget.getAttribute('itemID')
+    if (itemId !== '0') return alert('사용가능한 아이템이 아닙니다.') // 금요귀가권
+    const res = await fetch('/api/item/use', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        itemId: Number(itemId),
+        token: localStorage.getItem('token')
+      })
+    })
+    const data = await res.json()
+    if (res.status === 200) {
+      alert(`아이템을 사용하였습니다.`)
+    } else {
+      alert(`사용에 실패하였습니다.\n${data.error}`)
+    }
+    getItems()
+  }
+
   async function resetItems(element: HTMLDivElement | null) {
     while (element?.firstChild) {
-      element.removeChild(element.firstChild);
+      element.removeChild(element.firstChild)
     }
   }
 
@@ -90,7 +112,10 @@ export default function shop() {
             <img src='img/coin-small.svg' height={20}></img>
             <p><b>{item.price}p</b></p>
           </div>
-          <button itemID={i.toString()} onClick={buyItem}>구매하기</button>
+          <div className={styles.row}>
+            <button itemID={i.toString()} onClick={buyItem}>구매하기</button>
+            {(item.name == '금요귀가권') &&  <button itemID={i.toString()} onClick={useItem}>사용하기</button>}
+          </div>
         </div>])
     })
   }

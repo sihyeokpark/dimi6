@@ -12,10 +12,16 @@ div.center {
   padding-bottom: 100px;
 }
 
+div.row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
 div.items {
   margin-top: 30px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   place-items: stretch start;
   justify-content: space-around;
   gap: 10px;
