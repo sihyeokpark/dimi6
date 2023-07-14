@@ -89,6 +89,28 @@ export default function admin() {
     return data
   }
 
+  async function checkFridayStudent(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    console.log(usedUsers)
+    const itemId = e.currentTarget.getAttribute('itemID') || -1 as number
+    const res = await fetch('/api/item/accept', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        token: localStorage.getItem('token'),
+        itemId: 0,
+        userName: usedUsers[itemId].user,
+        isAccpeted: e.currentTarget.value === 'true'
+      })
+    })
+    const data = await res.json()
+    if (res.status !== 200) {
+      alert('오류가 발생했습니다.\n' + data.error)
+    }
+    setUsedUsers(await getFridayStudent())
+  }
+
   return (
     <>
       <div className={styles.center}>
@@ -129,11 +151,16 @@ export default function admin() {
                         {
                           usedUsers.map((user: any, index: number) => {
                             return (
-                              <tr key={1} className={styles.friday}>
-                                <td className={styles.friday}>{user.id}</td>
-                                <td className={styles.friday}>{user.user}</td>
-                                <td className={styles.friday}>{user.date.toString().replace('T', ' (').split('.')[0]+')'}</td>
-                                <td className={styles.fridayButton}><button>허용</button><button>거절</button></td>
+                              <tr key={index} className={styles.friday}>
+                                <td className={styles.friday}>{usedUsers[index].id}</td>
+                                <td className={styles.friday}>{usedUsers[index].user}</td>
+                                <td className={styles.friday}>{usedUsers[index].date.toString().replace('T', ' (').split('.')[0]+')'}</td>
+                                <td className={styles.fridayButton}>
+                                  {usedUsers[index].isPending ? (<>
+                                    <button onClick={checkFridayStudent} itemID={index as unknown as string} value='true'>허용</button>
+                                    <button onClick={checkFridayStudent} itemID={index as unknown as string} value='false'>거절</button>
+                                  </>): usedUsers[index].isAccepted ? '승인' : '거절'}
+                                </td> 
                               </tr>
                             )
                           })

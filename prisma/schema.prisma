@@ -44,5 +44,7 @@ model UsedItem {
   id          Int         @default(autoincrement()) @id
   itemId      Int         @default(0)
   user        String      @default("")
+  isPending   Boolean     @default(true)
+  isAccepted  Boolean     @default(false)
   date        DateTime    @default(now())
 }
