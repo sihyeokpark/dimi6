@@ -17,20 +17,27 @@ div.center {
 }
 
 table.noticeTable {
-  width: 100%;
   border-radius: 15px;
-}
-
-main.main button {
+  width: 1080px;
 }
 
 table.noticeTable th, table.noticeTable td {
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break:break-all;
+  width: 1080px;
   text-align: center;
   width: 15px;
   padding-bottom: 10px;
 }
 
 table.noticeTable tbody tr {
+  width: 1080px;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break:break-all;
   cursor: pointer;
 }
 
