@@ -3,4 +3,5 @@
  
 Point system for Korea Digital Media High School first grader of class 6 
 
-<img src="./a.png">
+<a href="https://dimi6.exon.kr"><img src="./a.png" style="border-radius:50px;"/></a>
+
