@@ -57,6 +57,7 @@ section.section {
   padding: 24px 24px;
   border-radius: 20px;
   gap: 15px;
+  height: fit-content;
 }
 
 select.select {
