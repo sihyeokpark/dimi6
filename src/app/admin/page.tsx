@@ -159,7 +159,7 @@ export default function admin() {
                                   {usedUsers[index].isPending ? (<>
                                     <button onClick={checkFridayStudent} itemID={index as unknown as string} value='true'>허용</button>
                                     <button onClick={checkFridayStudent} itemID={index as unknown as string} value='false'>거절</button>
-                                  </>): usedUsers[index].isAccepted ? '승인' : '거절'}
+                                  </>): usedUsers[index].isAccepted ? <button className='green' disabled>승인</button> : <button className='red' disabled>거절</button>}
                                 </td> 
                               </tr>
                             )

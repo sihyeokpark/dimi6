@@ -125,3 +125,13 @@ div.center {
   text-align: left;
   padding-bottom: 100px;
 }
+
+.green {
+  background-color: #3cb371;
+  cursor: inherit;
+}
+
+.red {
+  background-color: #d44252;
+  cursor: inherit;
+}

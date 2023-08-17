@@ -31,6 +31,7 @@ export default function shop() {
         <main className={styles.main}>
           <h1>게시판</h1>
 
+          
           <div className={styles.top}>
             <button onClick={() => {
               router.push('/notice/write')
