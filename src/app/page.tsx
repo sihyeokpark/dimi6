@@ -40,7 +40,7 @@ export default function Page() {
     if (res.status === 200) {
       setIsLogin(true)
       const data = await res.json()
-      noticeText.current!.innerText = `${data.name}님, 환영합니다.`
+      // noticeText.current!.innerText = `${data.name}님, 환영합니다.`
       getPoint()
     }
     else {
@@ -83,9 +83,9 @@ export default function Page() {
             <p>한국디지털미디어고등학교</p>
             <h1>1학년 6반 포인트 시스템</h1>
           </div>
-          <div className={styles.notice}>
+          {/* <div className={styles.notice}>
             <img src='img/megaphone.png' height={30}></img><p ref={noticeText}>로그인을 해주세요.</p>
-          </div>
+          </div> */}
           <section className={styles.content}>
             <div className={styles.card}>
               <div className={styles.row}>
