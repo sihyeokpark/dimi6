@@ -154,7 +154,7 @@ export default function admin() {
                   <button onClick={send}>전송</button>
                 </section>
                 <div className={styles.fridaySection}>
-                  <div className={styles.spaceBetween}>
+                  <div className='spaceBetween'>
                     <h2>금요귀가권 신청자 목록</h2>
                     <button onClick={resetFridayStudent}>결정된 요청 초기화하기</button>
                   </div>

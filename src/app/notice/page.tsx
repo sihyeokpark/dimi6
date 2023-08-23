@@ -32,7 +32,9 @@ export default function shop() {
           <h1>게시판</h1>
 
           
-          <div className={styles.top}>
+          <div className={styles.top}/>
+          <div className='spaceBetween'>
+            <p></p>
             <button onClick={() => {
               router.push('/notice/write')
             }}>글쓰기</button>
