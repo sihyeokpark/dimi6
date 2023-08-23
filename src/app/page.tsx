@@ -84,7 +84,7 @@ export default function Page() {
             <h1>1학년 6반 포인트 시스템</h1>
           </div>
           <div className={styles.notice}>
-          <img src='img/megaphone.png' height={30}></img><p ref={noticeText}>로그인을 해주세요.</p>
+            <img src='img/megaphone.png' height={30}></img><p ref={noticeText}>로그인을 해주세요.</p>
           </div>
           <section className={styles.content}>
             <div className={styles.card}>
