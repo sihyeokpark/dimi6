@@ -111,6 +111,23 @@ export default function admin() {
     setUsedUsers(await getFridayStudent())
   }
 
+  async function resetFridayStudent() {
+    const res = await fetch('/api/item/reset', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        token: localStorage.getItem('token')
+      })
+    })
+    const data = await res.json()
+    if (res.status !== 200) {
+      alert('오류가 발생했습니다.\n' + data.error)
+    }
+    setUsedUsers(await getFridayStudent())
+  }
+
   return (
     <>
       <div className={styles.center}>
@@ -137,7 +154,10 @@ export default function admin() {
                   <button onClick={send}>전송</button>
                 </section>
                 <div className={styles.fridaySection}>
-                  <h2>금요귀가권 신청자 목록</h2>
+                  <div className={styles.spaceBetween}>
+                    <h2>금요귀가권 신청자 목록</h2>
+                    <button onClick={resetFridayStudent}>결정된 요청 초기화하기</button>
+                  </div>
                   <table className={styles.friday}>
                     <thead>
                       <tr>

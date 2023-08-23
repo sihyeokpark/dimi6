@@ -17,21 +17,8 @@ export async function POST(
   else if (verifyResult === JwtStatusCode.TokenInvalid) return NextResponse.json({ error: 'not authenticated', message: 'token invalid'}, { status: 401 })
   if (adminList.indexOf(tokenData.name) === -1) return NextResponse.json({ error: 'not authenticated', message: 'not admin'}, { status: 401 })
 
-  console.log(body.userName, +body.itemId)
+  await client.usedItem.deleteMany({ where: { isPending: false }})
 
-  const usedItem = await client.usedItem.findFirst({ where: { user: body.userName, itemId: +body.itemId } })
-  if (!usedItem) return NextResponse.json({ error: 'No item' }, { status: 403})
-
-  
-  if (usedItem) {
-    await client.usedItem.updateMany({ where: { user: body.userName, itemId: +body.itemId }, data: { isPending: false, isAccepted: body.isAccpeted } })
-    if (!body.isAccepted) {
-      const user = await client.user.findFirst({ where: { name: body.userName } })
-      const nowInventory = await client.inventory.findFirst({ where: { id: user?.id, itemId: body.itemId } })
-      await client.inventory.updateMany({ where: { id: user?.id, itemId: body.itemId }, data: { itemCount: (nowInventory?.itemCount as number) + 1 } })
-    }
-  }
-  
 
   return NextResponse.json({ message: 'success' }, { status: 200 })
 }
