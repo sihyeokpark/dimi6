@@ -28,7 +28,7 @@ export async function POST(
     if (!body.isAccepted) {
       const user = await client.user.findFirst({ where: { name: body.userName } })
       const nowInventory = await client.inventory.findFirst({ where: { id: user?.id, itemId: body.itemId } })
-      await client.inventory.updateMany({ where: { id: user?.id, itemId: body.itemId }, data: { itemCount: (nowInventory?.itemCount as number) + 1 } })
+      // await client.inventory.updateMany({ where: { id: user?.id, itemId: body.itemId }, data: { itemCount: (nowInventory?.itemCount as number) + 1 } })
     }
   }
   
